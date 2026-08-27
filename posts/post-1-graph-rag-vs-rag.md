@@ -44,7 +44,7 @@ The difference in practice:
 → RAG guesses how facts connect.
 → Graph RAG proves the path — or asks for more detail when the question is ambiguous.
 
-I built a Graph RAG for mining-asset maintenance diagnostics all synthetic data: describe the symptom, the agent walks the graph, and answers with the probable cause and corrective action, citing the exact path.
+I built a Graph RAG for industrial-asset maintenance diagnostics all synthetic data: describe the symptom, the agent walks the graph, and answers with the probable cause and corrective action, citing the exact path.
 
 Open source, zero pre-built graph-RAG frameworks. Link in the comments. 👇
 

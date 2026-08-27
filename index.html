@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Graph RAG Agent Mining — Knowledge Graph for Mining Maintenance Diagnostics</title>
-<meta name="description" content="A Graph RAG (Graph Retrieval-Augmented Generation) system built from scratch: helps mining maintenance professionals trace the probable cause and corrective action for an asset failure through a real, traceable knowledge graph — never a guess. All data is synthetic.">
+<title>Graph RAG Agent — Knowledge Graph for Industrial Maintenance Diagnostics</title>
+<meta name="description" content="A Graph RAG (Graph Retrieval-Augmented Generation) system built from scratch: helps industrial maintenance professionals trace the probable cause and corrective action for an asset failure through a real, traceable knowledge graph — never a guess. All data is synthetic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -347,8 +347,8 @@ footer {
 <!-- ================= HERO ================= -->
 <section class="hero container" id="top">
   <p class="kicker" data-i18n="hero.kicker">Graph Retrieval-Augmented Generation · built from scratch · synthetic data</p>
-  <h1 data-i18n="hero.title">Graph RAG Agent Mining</h1>
-  <p class="lead" data-i18n="hero.lead">A diagnostic assistant for mining maintenance teams. Describe a fault in plain language and get the probable cause and corrective action for screens, conveyors, haul trucks and crushers — traced through a real knowledge graph, never guessed.</p>
+  <h1 data-i18n="hero.title">Graph RAG Agent</h1>
+  <p class="lead" data-i18n="hero.lead">A diagnostic assistant for industrial maintenance teams. Describe a fault in plain language and get the probable cause and corrective action for screens, conveyors, haul trucks and crushers — traced through a real knowledge graph, never guessed.</p>
   <div class="hero-actions">
     <a class="btn btn-primary" href="#graph-rag" data-i18n="hero.btnGraphRag">What is Graph RAG?</a>
     <a class="btn btn-outline" href="#databases" data-i18n="hero.btnDb">Explore the databases</a>
@@ -467,7 +467,7 @@ footer {
         <div class="num">1</div>
         <div>
           <h3 data-i18n="arch.s1.title">Source manuals — <code>data/raw/</code></h3>
-          <p data-i18n="arch.s1.text">Four synthetic maintenance manuals, one per mining asset type, each describing the equipment's components and their known failure modes.</p>
+          <p data-i18n="arch.s1.text">Four synthetic maintenance manuals, one per industrial asset type, each describing the equipment's components and their known failure modes.</p>
         </div>
       </div>
       <div class="pipe-arrow">▼</div>
@@ -525,36 +525,36 @@ footer {
 <!-- ================= DATABASES ================= -->
 <section class="section section-alt" id="databases">
   <div class="container">
-    <h2 class="section-title reveal" data-i18n="db.title">Four synthetic manuals, one mining domain</h2>
+    <h2 class="section-title reveal" data-i18n="db.title">Four synthetic manuals, one industrial domain</h2>
     <p class="section-sub reveal" data-i18n="db.sub">Each manual is an independent source document — its own components, symptoms, causes and corrective actions — before extraction unifies all four into a single graph.</p>
-    <div class="note reveal" data-i18n="db.syntheticNote">⚠️ <strong>All data below is synthetic.</strong> These four manuals, and every component, symptom, cause and corrective action inside them, were written to simulate realistic maintenance documentation — none of it was extracted from a real manufacturer's manual or a real mining operation.</div>
+    <div class="note reveal" data-i18n="db.syntheticNote">⚠️ <strong>All data below is synthetic.</strong> These four manuals, and every component, symptom, cause and corrective action inside them, were written to simulate realistic maintenance documentation — none of it was extracted from a real manufacturer's manual or a real industrial operation.</div>
     <div class="db-grid">
       <div class="db-card reveal">
         <div class="icon">🔧</div>
         <h3 data-i18n="db.card1Title">Vibrating Screen — PVI-1000</h3>
         <span class="db-meta" data-i18n="db.card1Meta">7 components covered</span>
-        <p data-i18n="db.card1Body">Classifies crushed ore by particle size before secondary crushing or grinding. Covers the drive motor, eccentric, eccentric bearings, support springs, screen mesh, vibrating structure and rubber dampers.</p>
+        <p data-i18n="db.card1Body">Classifies crushed bulk material by particle size before secondary crushing or grinding. Covers the drive motor, eccentric, eccentric bearings, support springs, screen mesh, vibrating structure and rubber dampers.</p>
         <p class="example" data-i18n="db.card1Example"><strong>Example:</strong> drive motor vibration traced to motor–eccentric misalignment; torn screen mesh traced to oversized rock impact.</p>
       </div>
       <div class="db-card reveal">
         <div class="icon">📦</div>
         <h3 data-i18n="db.card2Title">Belt Conveyor — TC-2000</h3>
         <span class="db-meta" data-i18n="db.card2Meta">9 components covered</span>
-        <p data-i18n="db.card2Body">Long-distance continuous transport of crushed ore between processing stages. Covers the drive motor, gearbox, drive and return pulleys, carrying and return idlers, belt, take-up and cleaning scrapers.</p>
+        <p data-i18n="db.card2Body">Long-distance continuous transport of crushed bulk material between processing stages. Covers the drive motor, gearbox, drive and return pulleys, carrying and return idlers, belt, take-up and cleaning scrapers.</p>
         <p class="example" data-i18n="db.card2Example"><strong>Example:</strong> a torn belt traced to a metal contaminant puncturing it; belt slippage on the drive pulley traced to low belt tension.</p>
       </div>
       <div class="db-card reveal">
         <div class="icon">🚛</div>
         <h3 data-i18n="db.card3Title">Haul Truck — CFE-400T</h3>
         <span class="db-meta" data-i18n="db.card3Meta">7 components covered</span>
-        <p data-i18n="db.card3Body">Hauls ore and waste rock between the pit and the crushing plant or dump sites. Covers the diesel engine, transmission, brakes, tires, dump body, hoist hydraulics and hydro-pneumatic suspension.</p>
+        <p data-i18n="db.card3Body">Hauls bulk material and waste between the loading area and the processing plant or dump sites. Covers the diesel engine, transmission, brakes, tires, dump body, hoist hydraulics and hydro-pneumatic suspension.</p>
         <p class="example" data-i18n="db.card3Example"><strong>Example:</strong> engine overheating traced to low coolant or a blocked radiator; irregular tire wear traced to incorrect tire pressure.</p>
       </div>
       <div class="db-card reveal">
         <div class="icon">⚙️</div>
         <h3 data-i18n="db.card4Title">Jaw Crusher — BM-1200</h3>
         <span class="db-meta" data-i18n="db.card4Meta">12 components covered</span>
-        <p data-i18n="db.card4Body">Primary crushing stage — the first size reduction of run-of-mine ore. Covers the fixed and moving jaw plates, eccentric shaft, flywheel, pitman, main bearings, tension springs, toggle plate, drive belts and lubrication system.</p>
+        <p data-i18n="db.card4Body">Primary crushing stage — the first size reduction of raw bulk feed material. Covers the fixed and moving jaw plates, eccentric shaft, flywheel, pitman, main bearings, tension springs, toggle plate, drive belts and lubrication system.</p>
         <p class="example" data-i18n="db.card4Example"><strong>Example:</strong> a broken tension spring traced to overload from an unbreakable object in the crushing chamber; toggle plate wear traced to insufficient lubrication.</p>
       </div>
     </div>
@@ -596,7 +596,7 @@ footer {
 </section>
 
 <footer>
-  <p data-i18n="footer.text">Graph RAG Agent Mining — portfolio project · knowledge graph built from scratch in Python · synthetic data</p>
+  <p data-i18n="footer.text">Graph RAG Agent — portfolio project · knowledge graph built from scratch in Python · synthetic data</p>
 </footer>
 
 <script>
@@ -611,8 +611,8 @@ const I18N = {
     "nav.databases": "Databases",
     "nav.cta": "Repository",
     "hero.kicker": "Graph Retrieval-Augmented Generation · built from scratch · synthetic data",
-    "hero.title": "Graph RAG Agent Mining",
-    "hero.lead": "A diagnostic assistant for mining maintenance teams. Describe a fault in plain language and get the probable cause and corrective action for screens, conveyors, haul trucks and crushers — traced through a real knowledge graph, never guessed.",
+    "hero.title": "Graph RAG Agent",
+    "hero.lead": "A diagnostic assistant for industrial maintenance teams. Describe a fault in plain language and get the probable cause and corrective action for screens, conveyors, haul trucks and crushers — traced through a real knowledge graph, never guessed.",
     "hero.btnGraphRag": "What is Graph RAG?",
     "hero.btnDb": "Explore the databases",
     "about.title": "Built for the people who fix the equipment",
@@ -655,7 +655,7 @@ const I18N = {
     "arch.title": "Architecture: from maintenance manual to grounded answer",
     "arch.sub": "Every step of the pipeline is a small, readable Python module — built by hand, with no graph-RAG framework in between.",
     "arch.s1.title": "Source manuals — <code>data/raw/</code>",
-    "arch.s1.text": "Four synthetic maintenance manuals, one per mining asset type, each describing the equipment's components and their known failure modes.",
+    "arch.s1.text": "Four synthetic maintenance manuals, one per industrial asset type, each describing the equipment's components and their known failure modes.",
     "arch.s2.title": "Extraction — <code>src/extraction.py</code>",
     "arch.s2.text": "An LLM reads each manual and extracts structured triples — origin, relation, destination — using only four allowed relations. Anything that doesn't fit the schema, or mixes up entity types, is discarded rather than forced in.",
     "arch.s3.title": "Graph construction — <code>src/graph_builder.py</code>",
@@ -668,24 +668,24 @@ const I18N = {
     "arch.s6.text": "The LLM writes the final answer using only the traced path, citing the exact chain of relationships and the source manual — never adding a relationship that wasn't found.",
     "arch.s7.title": "Interface — <code>app.py</code> (Streamlit)",
     "arch.s7.text": "A chat interface with separate conversations (create, rename, delete), a live animation tracing the graph nodes visited while the answer is prepared, and the full reasoning path shown below each response.",
-    "db.title": "Four synthetic manuals, one mining domain",
+    "db.title": "Four synthetic manuals, one industrial domain",
     "db.sub": "Each manual is an independent source document — its own components, symptoms, causes and corrective actions — before extraction unifies all four into a single graph.",
-    "db.syntheticNote": "⚠️ <strong>All data below is synthetic.</strong> These four manuals, and every component, symptom, cause and corrective action inside them, were written to simulate realistic maintenance documentation — none of it was extracted from a real manufacturer's manual or a real mining operation.",
+    "db.syntheticNote": "⚠️ <strong>All data below is synthetic.</strong> These four manuals, and every component, symptom, cause and corrective action inside them, were written to simulate realistic maintenance documentation — none of it was extracted from a real manufacturer's manual or a real industrial operation.",
     "db.card1Title": "Vibrating Screen — PVI-1000",
     "db.card1Meta": "7 components covered",
-    "db.card1Body": "Classifies crushed ore by particle size before secondary crushing or grinding. Covers the drive motor, eccentric, eccentric bearings, support springs, screen mesh, vibrating structure and rubber dampers.",
+    "db.card1Body": "Classifies crushed bulk material by particle size before secondary crushing or grinding. Covers the drive motor, eccentric, eccentric bearings, support springs, screen mesh, vibrating structure and rubber dampers.",
     "db.card1Example": "<strong>Example:</strong> drive motor vibration traced to motor–eccentric misalignment; torn screen mesh traced to oversized rock impact.",
     "db.card2Title": "Belt Conveyor — TC-2000",
     "db.card2Meta": "9 components covered",
-    "db.card2Body": "Long-distance continuous transport of crushed ore between processing stages. Covers the drive motor, gearbox, drive and return pulleys, carrying and return idlers, belt, take-up and cleaning scrapers.",
+    "db.card2Body": "Long-distance continuous transport of crushed bulk material between processing stages. Covers the drive motor, gearbox, drive and return pulleys, carrying and return idlers, belt, take-up and cleaning scrapers.",
     "db.card2Example": "<strong>Example:</strong> a torn belt traced to a metal contaminant puncturing it; belt slippage on the drive pulley traced to low belt tension.",
     "db.card3Title": "Haul Truck — CFE-400T",
     "db.card3Meta": "7 components covered",
-    "db.card3Body": "Hauls ore and waste rock between the pit and the crushing plant or dump sites. Covers the diesel engine, transmission, brakes, tires, dump body, hoist hydraulics and hydro-pneumatic suspension.",
+    "db.card3Body": "Hauls bulk material and waste between the loading area and the processing plant or dump sites. Covers the diesel engine, transmission, brakes, tires, dump body, hoist hydraulics and hydro-pneumatic suspension.",
     "db.card3Example": "<strong>Example:</strong> engine overheating traced to low coolant or a blocked radiator; irregular tire wear traced to incorrect tire pressure.",
     "db.card4Title": "Jaw Crusher — BM-1200",
     "db.card4Meta": "12 components covered",
-    "db.card4Body": "Primary crushing stage — the first size reduction of run-of-mine ore. Covers the fixed and moving jaw plates, eccentric shaft, flywheel, pitman, main bearings, tension springs, toggle plate, drive belts and lubrication system.",
+    "db.card4Body": "Primary crushing stage — the first size reduction of raw bulk feed material. Covers the fixed and moving jaw plates, eccentric shaft, flywheel, pitman, main bearings, tension springs, toggle plate, drive belts and lubrication system.",
     "db.card4Example": "<strong>Example:</strong> a broken tension spring traced to overload from an unbreakable object in the crushing chamber; toggle plate wear traced to insufficient lubrication.",
     "stack.title": "Tech stack",
     "stack.sub": "Deliberately minimal — every dependency has a single, clear job. No graph-RAG framework anywhere in the pipeline.",
@@ -703,7 +703,7 @@ const I18N = {
     "contact.sub": "The full source code is open — every module is small enough to read in one sitting.",
     "contact.repo": "GitHub repository",
     "contact.author": "Author",
-    "footer.text": "Graph RAG Agent Mining — portfolio project · knowledge graph built from scratch in Python · synthetic data"
+    "footer.text": "Graph RAG Agent — portfolio project · knowledge graph built from scratch in Python · synthetic data"
   },
   pt: {
     "nav.about": "Sobre",
@@ -712,8 +712,8 @@ const I18N = {
     "nav.databases": "Bases de dados",
     "nav.cta": "Repositório",
     "hero.kicker": "Graph Retrieval-Augmented Generation · construído do zero · dados sintéticos",
-    "hero.title": "Graph RAG Agent Mining",
-    "hero.lead": "Um assistente de diagnóstico para equipes de manutenção de mineração. Descreva uma falha em linguagem natural e receba a causa provável e a ação corretiva para peneiras, transportadores, caminhões fora de estrada e britadores — rastreado por um grafo de conhecimento real, nunca chutado.",
+    "hero.title": "Graph RAG Agent",
+    "hero.lead": "Um assistente de diagnóstico para equipes de manutenção industrial. Descreva uma falha em linguagem natural e receba a causa provável e a ação corretiva para peneiras, transportadores, caminhões fora de estrada e britadores — rastreado por um grafo de conhecimento real, nunca chutado.",
     "hero.btnGraphRag": "O que é Graph RAG?",
     "hero.btnDb": "Explorar as bases de dados",
     "about.title": "Feito para quem conserta o equipamento",
@@ -756,7 +756,7 @@ const I18N = {
     "arch.title": "Arquitetura: do manual de manutenção à resposta ancorada",
     "arch.sub": "Cada etapa do pipeline é um módulo Python pequeno e legível — construído à mão, sem nenhum framework de graph-RAG no meio do caminho.",
     "arch.s1.title": "Manuais de origem — <code>data/raw/</code>",
-    "arch.s1.text": "Quatro manuais de manutenção sintéticos, um por tipo de ativo de mineração, cada um descrevendo os componentes do equipamento e seus modos de falha conhecidos.",
+    "arch.s1.text": "Quatro manuais de manutenção sintéticos, um por tipo de ativo industrial, cada um descrevendo os componentes do equipamento e seus modos de falha conhecidos.",
     "arch.s2.title": "Extração — <code>src/extraction.py</code>",
     "arch.s2.text": "Um LLM lê cada manual e extrai triplas estruturadas — origem, relação, destino — usando somente quatro relações permitidas. O que não se encaixa no esquema, ou mistura tipos de entidade, é descartado em vez de forçado.",
     "arch.s3.title": "Construção do grafo — <code>src/graph_builder.py</code>",
@@ -769,24 +769,24 @@ const I18N = {
     "arch.s6.text": "O LLM escreve a resposta final usando somente o caminho percorrido, citando a cadeia exata de relações e o manual de origem — nunca acrescentando uma relação que não foi encontrada.",
     "arch.s7.title": "Interface — <code>app.py</code> (Streamlit)",
     "arch.s7.text": "Uma interface de chat com conversas separadas (criar, renomear, apagar), uma animação ao vivo rastreando os nós do grafo visitados enquanto a resposta é preparada, e o caminho de raciocínio completo exibido abaixo de cada resposta.",
-    "db.title": "Quatro manuais sintéticos, um domínio de mineração",
+    "db.title": "Quatro manuais sintéticos, um domínio industrial",
     "db.sub": "Cada manual é um documento de origem independente — seus próprios componentes, sintomas, causas e ações corretivas — antes de a extração unificar os quatro em um único grafo.",
-    "db.syntheticNote": "⚠️ <strong>Todos os dados abaixo são sintéticos.</strong> Esses quatro manuais, e cada componente, sintoma, causa e ação corretiva dentro deles, foram escritos para simular uma documentação de manutenção realista — nada disso foi extraído de um manual real de fabricante ou de uma operação de mineração real.",
+    "db.syntheticNote": "⚠️ <strong>Todos os dados abaixo são sintéticos.</strong> Esses quatro manuais, e cada componente, sintoma, causa e ação corretiva dentro deles, foram escritos para simular uma documentação de manutenção realista — nada disso foi extraído de um manual real de fabricante ou de uma operação industrial real.",
     "db.card1Title": "Peneira Vibratória — PVI-1000",
     "db.card1Meta": "7 componentes cobertos",
-    "db.card1Body": "Classifica o minério britado por faixa de tamanho antes da britagem secundária ou moagem. Cobre o motor de acionamento, o excêntrico, os mancais do excêntrico, as molas de suporte, a tela de peneiramento, a estrutura vibratória e os amortecedores de borracha.",
+    "db.card1Body": "Classifica o material britado por faixa de tamanho antes da britagem secundária ou moagem. Cobre o motor de acionamento, o excêntrico, os mancais do excêntrico, as molas de suporte, a tela de peneiramento, a estrutura vibratória e os amortecedores de borracha.",
     "db.card1Example": "<strong>Exemplo:</strong> vibração no motor de acionamento rastreada até o desalinhamento entre motor e excêntrico; rasgo na tela rastreado até impacto de blocos sobredimensionados.",
     "db.card2Title": "Transportador de Correia — TC-2000",
     "db.card2Meta": "9 componentes cobertos",
-    "db.card2Body": "Transporte contínuo de longa distância de minério britado entre etapas do processo. Cobre o motor de acionamento, o redutor, os tambores de acionamento e retorno, os roletes de carga e retorno, a correia, o esticador e os raspadores de limpeza.",
+    "db.card2Body": "Transporte contínuo de longa distância de material britado entre etapas do processo. Cobre o motor de acionamento, o redutor, os tambores de acionamento e retorno, os roletes de carga e retorno, a correia, o esticador e os raspadores de limpeza.",
     "db.card2Example": "<strong>Exemplo:</strong> rasgo na correia rastreado até perfuração por contaminante metálico; patinação no tambor de acionamento rastreada até baixa tensão da correia.",
     "db.card3Title": "Caminhão Fora de Estrada — CFE-400T",
     "db.card3Meta": "7 componentes cobertos",
-    "db.card3Body": "Transporta minério e estéril entre a lavra e a britagem ou pilhas de disposição. Cobre o motor diesel, a transmissão, os freios, os pneus, a caçamba basculante, o sistema hidráulico de basculamento e a suspensão hidropneumática.",
+    "db.card3Body": "Transporta material a granel e rejeitos entre a área de carregamento e a britagem ou pilhas de disposição. Cobre o motor diesel, a transmissão, os freios, os pneus, a caçamba basculante, o sistema hidráulico de basculamento e a suspensão hidropneumática.",
     "db.card3Example": "<strong>Exemplo:</strong> superaquecimento do motor rastreado até baixo nível de arrefecimento ou radiador obstruído; desgaste irregular dos pneus rastreado até pressão de calibragem incorreta.",
     "db.card4Title": "Britador de Mandíbulas — BM-1200",
     "db.card4Meta": "12 componentes cobertos",
-    "db.card4Body": "Etapa de britagem primária — a primeira redução granulométrica do minério lavrado. Cobre as mandíbulas fixa e móvel, o eixo excêntrico, o volante, a biela, os mancais principais, as molas de tração, a placa de articulação, as correias de transmissão e o sistema de lubrificação.",
+    "db.card4Body": "Etapa de britagem primária — a primeira redução granulométrica do material bruto de alimentação. Cobre as mandíbulas fixa e móvel, o eixo excêntrico, o volante, a biela, os mancais principais, as molas de tração, a placa de articulação, as correias de transmissão e o sistema de lubrificação.",
     "db.card4Example": "<strong>Exemplo:</strong> quebra de mola de tração rastreada até sobrecarga por material não britável na câmara; desgaste da placa de articulação rastreado até lubrificação insuficiente.",
     "stack.title": "Stack tecnológica",
     "stack.sub": "Deliberadamente mínima — cada dependência tem um trabalho único e claro. Nenhum framework de graph-RAG em nenhum ponto do pipeline.",
@@ -804,7 +804,7 @@ const I18N = {
     "contact.sub": "O código-fonte completo é aberto — cada módulo é pequeno o bastante para ler de uma sentada.",
     "contact.repo": "Repositório no GitHub",
     "contact.author": "Autor",
-    "footer.text": "Graph RAG Agent Mining — projeto de portfólio · grafo de conhecimento construído do zero em Python · dados sintéticos"
+    "footer.text": "Graph RAG Agent — projeto de portfólio · grafo de conhecimento construído do zero em Python · dados sintéticos"
   }
 };
 

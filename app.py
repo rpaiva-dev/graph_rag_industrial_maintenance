@@ -1,7 +1,7 @@
-"""Streamlit front-end for Graph RAG Agent Mining (all mining data is synthetic).
+"""Streamlit front-end for Graph RAG Agent (all data is synthetic).
 
 LLM-style layout (ChatGPT/Claude):
-- Sidebar with the "Graph RAG Agent Mining" logo, a new-chat button and the list
+- Sidebar with the "Graph RAG Agent" logo, a new-chat button and the list
   of session conversations (each conversation keeps its own history).
 - Config menu with an "About" option: explains the pipeline step by step,
   lists the monitored assets (with description and components) and shows
@@ -36,7 +36,7 @@ from src.graph_builder import GRAPH_FILE, load_graph, run_graph_construction
 from src.graph_query import query
 from src.graph_viz import generate_graph_html, generate_trace_html, subgraph_from_paths
 
-st.set_page_config(page_title="Graph RAG Agent Mining", page_icon="🛠️", layout="wide")
+st.set_page_config(page_title="Graph RAG Agent", page_icon="🛠️", layout="wide")
 
 RAW_FILE = Path(__file__).resolve().parent / "data" / "raw" / "maintenance_manuals.json"
 
@@ -122,7 +122,7 @@ with st.sidebar:
         <div style="display:flex;align-items:center;gap:10px;padding:4px 0 12px 0;">
           <div style="font-size:30px;">🛠️</div>
           <div>
-            <div style="font-size:19px;font-weight:700;line-height:1.1;">Graph RAG Agent Mining</div>
+            <div style="font-size:19px;font-weight:700;line-height:1.1;">Graph RAG Agent</div>
             <div style="font-size:12px;opacity:.65;">Graph Retrieval-Augmented Generation · synthetic data</div>
           </div>
         </div>
@@ -200,14 +200,14 @@ specific enough.
 > ⚠️ **All data in this app is synthetic.** The four equipment manuals,
 > their components, symptoms, causes and corrective actions were written
 > to simulate realistic industrial-maintenance documentation — none of it
-> was extracted from a real manufacturer's manual or any real mining
+> was extracted from a real manufacturer's manual or any real industrial
 > operation.
 
 ### Offline phase — building the knowledge base (runs once)
 
 | Step | What happens | Module |
 |---|---|---|
-| **1. Documents** | Synthetic maintenance manuals for 4 mining asset types live in `data/raw/`, each with a source label | `data/raw/` |
+| **1. Documents** | Synthetic maintenance manuals for 4 industrial asset types live in `data/raw/`, each with a source label | `data/raw/` |
 | **2. Triple extraction** | The LLM reads each manual and extracts structured relations `(origin, relation, destination)` with types. Only 4 relations are allowed: `has_component`, `has_symptom`, `indicates_cause`, `resolved_by`. Each triple is validated (the relation must connect the right types) | `src/extraction.py` |
 | **3. Graph construction** | The triples become a directed graph: each entity is a **node** (with a type), each relation is an **edge** (with its source document). The same entity mentioned across manuals becomes ONE shared node | `src/graph_builder.py` |
 
@@ -248,7 +248,7 @@ edges, the agent asks.
 
     st.divider()
     st.subheader("🏭 Monitored assets")
-    st.caption("The 4 mining asset types covered by the current knowledge base — all data is synthetic.")
+    st.caption("The 4 industrial asset types covered by the current knowledge base — all data is synthetic.")
     for asset in get_monitored_assets():
         with st.container(border=True):
             st.markdown(f"**{asset['source']}**  \n*{asset['category']}*")
@@ -278,8 +278,8 @@ if not conversation["messages"]:
         """
         <div style="text-align:center;padding:60px 0 20px 0;">
           <div style="font-size:52px;">🛠️</div>
-          <h2 style="margin:4px 0;">Graph RAG Agent Mining</h2>
-          <p style="opacity:.7;">Describe the problem on a mining asset (vibrating screen, belt
+          <h2 style="margin:4px 0;">Graph RAG Agent</h2>
+          <p style="opacity:.7;">Describe the problem on an industrial asset (vibrating screen, belt
           conveyor, haul truck or jaw crusher) and I'll walk the knowledge graph to find the
           probable cause and the corrective action. All data is synthetic.</p>
           <p style="opacity:.55;font-size:13px;">E.g.: <i>"The crusher's eccentric shaft has

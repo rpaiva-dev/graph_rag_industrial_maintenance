@@ -2,11 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project: Graph RAG Agent Mining
+## Project: Graph RAG Agent
 
 A Graph RAG (Graph Retrieval-Augmented Generation) system built from SCRATCH, with no ready-made knowledge-graph framework (no LangChain GraphRAG, no LlamaIndex KG, etc). The goal is to learn entity/relation extraction, knowledge graph construction and multi-hop reasoning by implementing every piece by hand.
 
-Domain: maintenance of **mining** assets — currently 4 asset types: vibrating screen, belt conveyor, off-road haul truck and jaw crusher. **All data in this project is synthetic** — the manuals, components, symptoms, causes and corrective actions were written to simulate realistic maintenance documentation; none of it comes from a real manufacturer manual or a real mining operation. Unlike plain RAG (text-similarity search), the system answers questions that require walking a CHAIN of cause-effect relations: Equipment → Component → Symptom → Cause → Corrective Action.
+Domain: maintenance of **industrial equipment** — currently 4 asset types: vibrating screen, belt conveyor, off-road haul truck and jaw crusher. **All data in this project is synthetic** — the manuals, components, symptoms, causes and corrective actions were written to simulate realistic maintenance documentation; none of it comes from a real manufacturer manual or a real industrial operation. Unlike plain RAG (text-similarity search), the system answers questions that require walking a CHAIN of cause-effect relations: Equipment → Component → Symptom → Cause → Corrective Action.
 
 When the user's question isn't specific enough to pick a single path (e.g. it names a component but not the symptom, or the equipment but not the component), the agent ASKS for more detail instead of guessing — that check is deterministic, based on the graph's structure (`src/graph_query.py::check_specificity`), not a judgment call made by the LLM.
 
@@ -35,7 +35,7 @@ The API key goes in a local `.env` (`OPENAI_API_KEY=...`, see `.env.example`) �
 Two-phase pipeline:
 
 **Offline phase (indexing):**
-1. `data/raw/maintenance_manuals.json` — synthetic mining-maintenance manuals (JSON with source metadata)
+1. `data/raw/maintenance_manuals.json` — synthetic industrial-maintenance manuals (JSON with source metadata)
 2. `src/extraction.py` — an LLM (via the `openai` lib) extracts `(origin, relation, destination)` triples with entity types; allowed relations: `has_component`, `has_symptom`, `indicates_cause`, `resolved_by`. Output validated into `data/processed/triples.json`
 3. `src/graph_builder.py` — builds an `nx.DiGraph` (nodes with a `type` attribute, edges with `relation_type` and `source`) and persists it to `.graphml`
 

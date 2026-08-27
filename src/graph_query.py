@@ -51,7 +51,7 @@ def identify_starting_entity(question: str, graph: nx.DiGraph) -> str | None:
     ]
     response = call_llm(
         system=(
-            "You map questions about maintenance of mining assets "
+            "You map questions about maintenance of industrial equipment "
             "(vibrating screens, belt conveyors, off-road haul trucks, "
             "jaw crushers) to entities in a knowledge graph. Given the "
             "question and the list of entities, return the EXACT name of "

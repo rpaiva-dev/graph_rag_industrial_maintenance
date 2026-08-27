@@ -1,4 +1,4 @@
-# Post 6 — Architecture: how the project actually works (Graph RAG Agent Mining)
+# Post 6 — Architecture: how the project actually works (Graph RAG Agent)
 
 **Visual asset:** `post-6-preview.png` (source: `post-6-graphic.html`)
 
@@ -6,9 +6,9 @@
 
 ## PT
 
-Por dentro do Graph RAG Agent Mining: 7 módulos Python pequenos e legíveis, sem nenhum framework de graph-RAG pronto no meio do caminho. Assim funciona, do manual de manutenção à resposta ancorada:
+Por dentro do Graph RAG Agent: 7 módulos Python pequenos e legíveis, sem nenhum framework de graph-RAG pronto no meio do caminho. Assim funciona, do manual de manutenção à resposta ancorada:
 
-1️⃣ Manuais de origem (`data/raw/`) — 4 manuais de manutenção sintéticos, um por tipo de ativo de mineração.
+1️⃣ Manuais de origem (`data/raw/`) — 4 manuais de manutenção sintéticos, um por tipo de ativo industrial.
 
 2️⃣ Extração (`src/extraction.py`) — um LLM lê cada manual e extrai triplas estruturadas, usando só 4 relações permitidas. O que não se encaixa no esquema é descartado.
 
@@ -30,9 +30,9 @@ Código aberto, dados sintéticos, zero frameworks de graph-RAG prontos. Link no
 
 ## EN
 
-Inside Graph RAG Agent Mining: 7 small, readable Python modules, with no pre-built graph-RAG framework anywhere in between. Here's how it works, from maintenance manual to grounded answer:
+Inside Graph RAG Agent: 7 small, readable Python modules, with no pre-built graph-RAG framework anywhere in between. Here's how it works, from maintenance manual to grounded answer:
 
-1️⃣ Source manuals (`data/raw/`) — 4 synthetic maintenance manuals, one per mining asset type.
+1️⃣ Source manuals (`data/raw/`) — 4 synthetic maintenance manuals, one per industrial asset type.
 
 2️⃣ Extraction (`src/extraction.py`) — an LLM reads each manual and extracts structured triples, using only 4 allowed relations. Anything that doesn't fit the schema is discarded.
 

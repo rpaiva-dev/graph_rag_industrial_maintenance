@@ -1,8 +1,8 @@
-# Graph RAG Agent Mining
+# Graph RAG Agent
 
-A **Graph RAG (Graph Retrieval-Augmented Generation)** system built from scratch (no LangChain GraphRAG, LlamaIndex KG or similar) over a mining-maintenance knowledge base: equipment, components, symptoms, causes and corrective actions.
+A **Graph RAG (Graph Retrieval-Augmented Generation)** system built from scratch (no LangChain GraphRAG, LlamaIndex KG or similar) over an industrial-maintenance knowledge base: equipment, components, symptoms, causes and corrective actions.
 
-> **All data used in this project is synthetic.** The four equipment manuals, and every component, symptom, cause and corrective action inside them, were written to simulate realistic industrial-maintenance documentation — none of it was extracted from a real manufacturer's manual or a real mining operation.
+> **All data used in this project is synthetic.** The four equipment manuals, and every component, symptom, cause and corrective action inside them, were written to simulate realistic industrial-maintenance documentation — none of it was extracted from a real manufacturer's manual or a real industrial operation.
 
 Unlike a plain RAG (which searches for similar-sounding text passages), Graph RAG answers questions that require walking a **chain of cause-effect relations** that doesn't live entirely in one passage:
 
