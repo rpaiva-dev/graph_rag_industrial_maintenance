@@ -1,0 +1,132 @@
+<title>Architecture — Graph RAG Agent Mining</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f5f5f7;
+    --text: #1d1d1f;
+    --text-soft: #6e6e73;
+    --line: #d2d2d7;
+    --accent: #0071e3;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; background: var(--bg-soft); color: var(--text);
+    font-family: "Manrope", -apple-system, "Segoe UI", sans-serif;
+    display: flex; justify-content: center; align-items: flex-start; padding: 28px 12px;
+  }
+  .stage {
+    width: 100%; max-width: 640px; aspect-ratio: 4 / 6.55;
+    background: var(--bg); border-radius: 20px; border: 1px solid var(--line);
+    padding: 32px 30px; display: flex; flex-direction: column; gap: 14px;
+    position: relative; overflow: hidden;
+  }
+  .stage::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 85% 0%, rgba(0, 113, 227, 0.08), transparent 45%);
+    pointer-events: none;
+  }
+  .head { position: relative; z-index: 1; }
+  .eyebrow {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px; display: block;
+  }
+  h1 { margin: 0 0 8px 0; font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; }
+  .head p { margin: 0; color: var(--text-soft); font-size: 0.88rem; max-width: 50ch; line-height: 1.45; }
+
+  .pipeline { display: flex; flex-direction: column; gap: 3px; position: relative; z-index: 1; }
+  .step {
+    display: flex; gap: 13px; align-items: flex-start;
+    background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px 15px;
+  }
+  .num {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 800; font-size: 0.78rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-copy h2 { margin: 0 0 2px 0; font-size: 0.86rem; font-weight: 700; }
+  .step-copy h2 code {
+    font-size: 0.72rem; font-weight: 600; background: var(--line); border-radius: 5px;
+    padding: 1px 5px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  }
+  .step-copy p { margin: 0; font-size: 0.76rem; color: var(--text-soft); line-height: 1.35; }
+  .pipe-arrow { text-align: center; color: var(--line); font-size: 0.8rem; line-height: 1; }
+
+  .foot {
+    position: relative; z-index: 1; font-size: 0.76rem; color: var(--text-soft);
+    border-top: 1px solid var(--line); padding-top: 12px; margin-top: auto;
+  }
+  .foot strong { color: var(--accent); }
+</style>
+
+<div class="stage">
+  <div class="head">
+    <span class="eyebrow">The pipeline</span>
+    <h1>How Graph RAG Agent Mining Works</h1>
+    <p>7 small, readable Python modules — no graph-RAG framework in between.</p>
+  </div>
+
+  <div class="pipeline">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="step-copy">
+        <h2>Source manuals — <code>data/raw/</code></h2>
+        <p>Four synthetic maintenance manuals, one per mining asset type.</p>
+      </div>
+    </div>
+    <div class="pipe-arrow">▼</div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="step-copy">
+        <h2>Extraction — <code>src/extraction.py</code></h2>
+        <p>An LLM extracts structured triples using only 4 allowed relations.</p>
+      </div>
+    </div>
+    <div class="pipe-arrow">▼</div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="step-copy">
+        <h2>Graph construction — <code>src/graph_builder.py</code></h2>
+        <p>Triples become one directed graph (NetworkX) — no external DB.</p>
+      </div>
+    </div>
+    <div class="pipe-arrow">▼</div>
+    <div class="step">
+      <div class="num">4</div>
+      <div class="step-copy">
+        <h2>Entity linking &amp; specificity check — <code>src/graph_query.py</code></h2>
+        <p>Maps the question to a real node; asks for detail if it's ambiguous.</p>
+      </div>
+    </div>
+    <div class="pipe-arrow">▼</div>
+    <div class="step">
+      <div class="num">5</div>
+      <div class="step-copy">
+        <h2>Deterministic traversal — <code>src/graph_query.py</code></h2>
+        <p>A plain algorithm — not the LLM — walks up to 3 hops.</p>
+      </div>
+    </div>
+    <div class="pipe-arrow">▼</div>
+    <div class="step">
+      <div class="num">6</div>
+      <div class="step-copy">
+        <h2>Grounded answer — <code>src/answer_builder.py</code></h2>
+        <p>The LLM answers only from the traced path, citing the source.</p>
+      </div>
+    </div>
+    <div class="pipe-arrow">▼</div>
+    <div class="step">
+      <div class="num">7</div>
+      <div class="step-copy">
+        <h2>Interface — <code>app.py</code> (Streamlit)</h2>
+        <p>Chat UI with a live animation tracing the graph nodes visited.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Open source, synthetic data, <strong>zero graph-RAG frameworks.</strong></div>
+</div>

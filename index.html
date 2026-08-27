@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAG Agent Mining — Knowledge Graph for Mining Maintenance Diagnostics</title>
-<meta name="description" content="A Knowledge Augmented Generation system built from scratch: helps mining maintenance professionals trace the probable cause and corrective action for an asset failure through a real, traceable knowledge graph — never a guess. All data is synthetic.">
+<title>Graph RAG Agent Mining — Knowledge Graph for Mining Maintenance Diagnostics</title>
+<meta name="description" content="A Graph RAG (Graph Retrieval-Augmented Generation) system built from scratch: helps mining maintenance professionals trace the probable cause and corrective action for an asset failure through a real, traceable knowledge graph — never a guess. All data is synthetic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -168,7 +168,7 @@ nav {
   white-space: nowrap; flex-shrink: 0;
 }
 
-/* ---------- KAG letters / analogy / steps ---------- */
+/* ---------- Graph RAG letters / analogy / steps ---------- */
 .analogy {
   border-left: 4px solid var(--accent); background: var(--bg);
   border-radius: 0 var(--radius) var(--radius) 0;
@@ -178,8 +178,8 @@ nav {
 .analogy strong { color: var(--text); }
 
 .rag-letters {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  max-width: 900px; margin: 0 auto 44px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  max-width: 980px; margin: 0 auto 44px;
 }
 .rag-letter {
   background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
@@ -208,7 +208,7 @@ nav {
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
 }
 
-/* ---------- KAG vs RAG comparison ---------- */
+/* ---------- Graph RAG vs RAG comparison ---------- */
 .compare-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
   max-width: 860px; margin: 0 auto;
@@ -217,7 +217,7 @@ nav {
   background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 28px;
 }
-.compare-card.is-kag { border-color: var(--accent); background: rgba(0, 113, 227, 0.04); }
+.compare-card.is-graph-rag { border-color: var(--accent); background: rgba(0, 113, 227, 0.04); }
 .compare-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
 .compare-card p { font-size: 0.92rem; color: var(--text-soft); margin-bottom: 10px; }
 .compare-card .tag {
@@ -226,7 +226,7 @@ nav {
   padding: 4px 10px; border-radius: 999px;
   background: var(--bg-soft); color: var(--text-soft); margin-bottom: 14px;
 }
-.compare-card.is-kag .tag { background: var(--accent); color: #fff; }
+.compare-card.is-graph-rag .tag { background: var(--accent); color: #fff; }
 
 /* ---------- architecture pipeline ---------- */
 .pipeline { max-width: 760px; margin: 0 auto; }
@@ -305,7 +305,8 @@ footer {
 
 /* ---------- responsive ---------- */
 @media (max-width: 860px) {
-  .cards-grid, .steps, .rag-letters, .db-grid, .compare-grid { grid-template-columns: 1fr; }
+  .cards-grid, .steps, .db-grid, .compare-grid { grid-template-columns: 1fr; }
+  .rag-letters { grid-template-columns: repeat(2, 1fr); }
   .tech-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 640px) {
@@ -316,6 +317,7 @@ footer {
     flex-direction: column; padding: 16px 24px; gap: 14px;
   }
   .nav-links.open { display: flex; }
+  .rag-letters { grid-template-columns: 1fr; }
   .tech-grid { grid-template-columns: repeat(2, 1fr); }
   .hero { padding: 70px 0 60px; }
   .section { padding: 60px 0; }
@@ -331,24 +333,24 @@ footer {
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about" data-i18n="nav.about">About</a></li>
-      <li><a href="#kag" data-i18n="nav.kag">What is a KAG</a></li>
+      <li><a href="#graph-rag" data-i18n="nav.graphrag">What is Graph RAG</a></li>
       <li><a href="#architecture" data-i18n="nav.architecture">Architecture</a></li>
       <li><a href="#databases" data-i18n="nav.databases">Databases</a></li>
     </ul>
     <div class="nav-actions">
       <button class="lang-toggle" id="langToggle">PT</button>
-      <a class="nav-cta" href="https://github.com/rpaiva-dev/kag_industrial_maintenance" target="_blank" rel="noopener" data-i18n="nav.cta">Repository</a>
+      <a class="nav-cta" href="https://github.com/rpaiva-dev/graph_rag_industrial_maintenance" target="_blank" rel="noopener" data-i18n="nav.cta">Repository</a>
     </div>
   </nav>
 </header>
 
 <!-- ================= HERO ================= -->
 <section class="hero container" id="top">
-  <p class="kicker" data-i18n="hero.kicker">Knowledge Augmented Generation · built from scratch · synthetic data</p>
-  <h1 data-i18n="hero.title">KAG Agent Mining</h1>
+  <p class="kicker" data-i18n="hero.kicker">Graph Retrieval-Augmented Generation · built from scratch · synthetic data</p>
+  <h1 data-i18n="hero.title">Graph RAG Agent Mining</h1>
   <p class="lead" data-i18n="hero.lead">A diagnostic assistant for mining maintenance teams. Describe a fault in plain language and get the probable cause and corrective action for screens, conveyors, haul trucks and crushers — traced through a real knowledge graph, never guessed.</p>
   <div class="hero-actions">
-    <a class="btn btn-primary" href="#kag" data-i18n="hero.btnKag">What is a KAG?</a>
+    <a class="btn btn-primary" href="#graph-rag" data-i18n="hero.btnGraphRag">What is Graph RAG?</a>
     <a class="btn btn-outline" href="#databases" data-i18n="hero.btnDb">Explore the databases</a>
   </div>
 </section>
@@ -378,60 +380,65 @@ footer {
   </div>
 </section>
 
-<!-- ================= WHAT IS A KAG ================= -->
-<section class="section" id="kag">
+<!-- ================= WHAT IS GRAPH RAG ================= -->
+<section class="section" id="graph-rag">
   <div class="container">
-    <h2 class="section-title reveal" data-i18n="kag.title">What is a KAG?</h2>
-    <p class="section-sub reveal" data-i18n="kag.sub">KAG stands for Knowledge Augmented Generation — an approach that grounds an LLM's answer in a structured knowledge graph of real entities and relationships, instead of loose retrieved text. Letter by letter:</p>
+    <h2 class="section-title reveal" data-i18n="graphrag.title">What is Graph RAG?</h2>
+    <p class="section-sub reveal" data-i18n="graphrag.sub">Graph RAG stands for Graph Retrieval-Augmented Generation — an approach that grounds an LLM's answer in a structured knowledge graph of real entities and relationships, instead of loose retrieved text. Letter by letter:</p>
     <div class="rag-letters">
       <div class="rag-letter reveal">
-        <span class="letter">K</span>
-        <h3 data-i18n="kag.k.title">Knowledge</h3>
-        <p data-i18n="kag.k.text">A structured graph of real entities and relationships — equipment, components, symptoms, causes and actions — extracted from the manuals, instead of an unstructured pile of text passages.</p>
+        <span class="letter">G</span>
+        <h3 data-i18n="graphrag.g1.title">Graph</h3>
+        <p data-i18n="graphrag.g1.text">A structured graph of real entities and relationships — equipment, components, symptoms, causes and actions — extracted from the manuals, instead of an unstructured pile of text passages.</p>
+      </div>
+      <div class="rag-letter reveal">
+        <span class="letter">R</span>
+        <h3 data-i18n="graphrag.r.title">Retrieval</h3>
+        <p data-i18n="graphrag.r.text">A deterministic algorithm walks the graph's real edges to find the path — retrieval is a graph traversal, not a similarity search over text.</p>
       </div>
       <div class="rag-letter reveal">
         <span class="letter">A</span>
-        <h3 data-i18n="kag.a.title">Augmented</h3>
-        <p data-i18n="kag.a.text">The model's prompt is enriched with the exact path found in that graph — the specific chain of edges connecting the reported symptom to a cause and a fix — not a loose paragraph that merely sounds related.</p>
+        <h3 data-i18n="graphrag.a.title">Augmented</h3>
+        <p data-i18n="graphrag.a.text">The model's prompt is enriched with the exact path found in that graph — the specific chain of edges connecting the reported symptom to a cause and a fix — not a loose paragraph that merely sounds related.</p>
       </div>
       <div class="rag-letter reveal">
         <span class="letter">G</span>
-        <h3 data-i18n="kag.g.title">Generation</h3>
-        <p data-i18n="kag.g.text">The model writes the final answer using only that path, under strict rules: cite the exact chain of relationships followed and the manual it came from — never add a relationship that wasn't found in the graph.</p>
+        <h3 data-i18n="graphrag.g2.title">Generation</h3>
+        <p data-i18n="graphrag.g2.text">The model writes the final answer using only that path, under strict rules: cite the exact chain of relationships followed and the manual it came from — never add a relationship that wasn't found in the graph.</p>
       </div>
     </div>
     <div class="analogy reveal">
-      <p data-i18n="kag.analogy"><strong>The wiring-diagram analogy:</strong> a plain AI chat is like a technician working from memory — confident, but occasionally wrong. This system works like someone following the plant's actual wiring diagram: before answering, it traces the real path from symptom to cause to corrective action, and only writes the answer using a path that truly exists in the diagram.</p>
+      <p data-i18n="graphrag.analogy"><strong>The wiring-diagram analogy:</strong> a plain AI chat is like a technician working from memory — confident, but occasionally wrong. This system works like someone following the plant's actual wiring diagram: before answering, it traces the real path from symptom to cause to corrective action, and only writes the answer using a path that truly exists in the diagram.</p>
     </div>
     <div class="steps">
       <div class="project-card reveal">
         <div class="icon">🤖</div>
-        <h3 data-i18n="kag.step1.title">1 · Extraction</h3>
-        <p data-i18n="kag.step1.text">An LLM reads each manual and extracts structured relationships — origin, relation, destination — using only four allowed relation types. Anything that doesn't fit the schema is discarded, not forced in.</p>
+        <h3 data-i18n="graphrag.step1.title">1 · Extraction</h3>
+        <p data-i18n="graphrag.step1.text">An LLM reads each manual and extracts structured relationships — origin, relation, destination — using only four allowed relation types. Anything that doesn't fit the schema is discarded, not forced in.</p>
       </div>
       <div class="project-card reveal">
         <div class="icon">🕸️</div>
-        <h3 data-i18n="kag.step2.title">2 · Graph construction</h3>
-        <p data-i18n="kag.step2.text">The relationships become one directed graph. The same entity mentioned in different manuals becomes a single shared node — this is how knowledge from separate documents connects.</p>
+        <h3 data-i18n="graphrag.step2.title">2 · Graph construction</h3>
+        <p data-i18n="graphrag.step2.text">The relationships become one directed graph. The same entity mentioned in different manuals becomes a single shared node — this is how knowledge from separate documents connects.</p>
       </div>
       <div class="project-card reveal">
         <div class="icon">🧮</div>
-        <h3 data-i18n="kag.step3.title">3 · Traversal &amp; generation</h3>
-        <p data-i18n="kag.step3.text">A plain algorithm — not the LLM — walks the graph from the identified entity, up to three hops. The LLM only writes the final sentence from the path it's handed.</p>
+        <h3 data-i18n="graphrag.step3.title">3 · Traversal &amp; generation</h3>
+        <p data-i18n="graphrag.step3.text">A plain algorithm — not the LLM — walks the graph from the identified entity, up to three hops. The LLM only writes the final sentence from the path it's handed.</p>
       </div>
     </div>
     <div class="chain-block reveal">
       <code class="chain">Equipment → Component → Symptom → Cause → Corrective Action</code>
-      <p style="margin-top:14px;" data-i18n="kag.chainCaption">Every answer is a walk along this chain — never a shortcut across it.</p>
+      <p style="margin-top:14px;" data-i18n="graphrag.chainCaption">Every answer is a walk along this chain — never a shortcut across it.</p>
     </div>
-    <div class="note reveal" data-i18n="kag.note">💡 If the graph has no path for a question — or the question is too vague to choose one — the agent says so, or asks for the missing detail, instead of inventing a relationship.</div>
+    <div class="note reveal" data-i18n="graphrag.note">💡 If the graph has no path for a question — or the question is too vague to choose one — the agent says so, or asks for the missing detail, instead of inventing a relationship.</div>
   </div>
 </section>
 
-<!-- ================= KAG VS RAG ================= -->
-<section class="section section-alt" id="kag-vs-rag">
+<!-- ================= GRAPH RAG VS RAG ================= -->
+<section class="section section-alt" id="graph-rag-vs-rag">
   <div class="container">
-    <h2 class="section-title reveal" data-i18n="cmp.title">KAG vs. RAG — what each one is for</h2>
+    <h2 class="section-title reveal" data-i18n="cmp.title">Graph RAG vs. RAG — what each one is for</h2>
     <p class="section-sub reveal" data-i18n="cmp.sub">Both are ways to ground an LLM in your own data instead of its training memory. They differ in what counts as "retrieved evidence" — and that changes what each is good at.</p>
     <div class="compare-grid">
       <div class="compare-card reveal">
@@ -440,11 +447,11 @@ footer {
         <p data-i18n="cmp.ragBody1">Splits documents into chunks and retrieves the ones that sound closest to the question. Works great when the answer lives inside a single passage — a contract clause, a paragraph in a report, an FAQ entry.</p>
         <p data-i18n="cmp.ragBody2">Struggles when the answer requires connecting facts scattered across different passages — the model has to guess how they relate, which is exactly where it can hallucinate.</p>
       </div>
-      <div class="compare-card is-kag reveal">
-        <span class="tag" data-i18n="cmp.kagTag">Best for: multi-hop, structured reasoning</span>
-        <h3 data-i18n="cmp.kagTitle">Knowledge Augmented Generation</h3>
-        <p data-i18n="cmp.kagBody1">Matches the question to a node in a real graph and walks the actual edges from there. Built for domains with explicit cause-and-effect chains — like equipment diagnostics — where the answer is a path, not a passage, and every step needs to be auditable.</p>
-        <p data-i18n="cmp.kagBody2">Costs more to set up (extraction + graph modeling) and fits a narrower, more structured domain than open-ended RAG — the trade-off for a reasoning chain you can fully trace.</p>
+      <div class="compare-card is-graph-rag reveal">
+        <span class="tag" data-i18n="cmp.graphragTag">Best for: multi-hop, structured reasoning</span>
+        <h3 data-i18n="cmp.graphragTitle">Graph RAG</h3>
+        <p data-i18n="cmp.graphragBody1">Matches the question to a node in a real graph and walks the actual edges from there. Built for domains with explicit cause-and-effect chains — like equipment diagnostics — where the answer is a path, not a passage, and every step needs to be auditable.</p>
+        <p data-i18n="cmp.graphragBody2">Costs more to set up (extraction + graph modeling) and fits a narrower, more structured domain than open-ended RAG — the trade-off for a reasoning chain you can fully trace.</p>
       </div>
     </div>
   </div>
@@ -582,14 +589,14 @@ footer {
     <h2 class="section-title reveal" data-i18n="contact.title">Explore the project</h2>
     <p class="section-sub reveal" data-i18n="contact.sub">The full source code is open — every module is small enough to read in one sitting.</p>
     <div class="contact-links reveal">
-      <a href="https://github.com/rpaiva-dev/kag_industrial_maintenance" target="_blank" rel="noopener" data-i18n="contact.repo">GitHub repository</a>
+      <a href="https://github.com/rpaiva-dev/graph_rag_industrial_maintenance" target="_blank" rel="noopener" data-i18n="contact.repo">GitHub repository</a>
       <a href="https://rpaiva-dev.github.io/landing-page/" target="_blank" rel="noopener" data-i18n="contact.author">Author</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p data-i18n="footer.text">KAG Agent Mining — portfolio project · knowledge graph built from scratch in Python · synthetic data</p>
+  <p data-i18n="footer.text">Graph RAG Agent Mining — portfolio project · knowledge graph built from scratch in Python · synthetic data</p>
 </footer>
 
 <script>
@@ -599,14 +606,14 @@ footer {
 const I18N = {
   en: {
     "nav.about": "About",
-    "nav.kag": "What is a KAG",
+    "nav.graphrag": "What is Graph RAG",
     "nav.architecture": "Architecture",
     "nav.databases": "Databases",
     "nav.cta": "Repository",
-    "hero.kicker": "Knowledge Augmented Generation · built from scratch · synthetic data",
-    "hero.title": "KAG Agent Mining",
+    "hero.kicker": "Graph Retrieval-Augmented Generation · built from scratch · synthetic data",
+    "hero.title": "Graph RAG Agent Mining",
     "hero.lead": "A diagnostic assistant for mining maintenance teams. Describe a fault in plain language and get the probable cause and corrective action for screens, conveyors, haul trucks and crushers — traced through a real knowledge graph, never guessed.",
-    "hero.btnKag": "What is a KAG?",
+    "hero.btnGraphRag": "What is Graph RAG?",
     "hero.btnDb": "Explore the databases",
     "about.title": "Built for the people who fix the equipment",
     "about.sub": "Maintenance and reliability teams don't have time to search a manual page by page while an asset is down. This project turns that search into a single question — and an answer you can verify.",
@@ -616,33 +623,35 @@ const I18N = {
     "about.card2.text": "Every answer names the likely cause and the corrective action, with the exact chain of relationships and the source manual it came from.",
     "about.card3.title": "Asked for detail, not given a guess",
     "about.card3.text": "If the question doesn't specify enough (e.g. a component with several possible symptoms), the agent asks which one — instead of picking one at random.",
-    "kag.title": "What is a KAG?",
-    "kag.sub": "KAG stands for Knowledge Augmented Generation — an approach that grounds an LLM's answer in a structured knowledge graph of real entities and relationships, instead of loose retrieved text. Letter by letter:",
-    "kag.k.title": "Knowledge",
-    "kag.k.text": "A structured graph of real entities and relationships — equipment, components, symptoms, causes and actions — extracted from the manuals, instead of an unstructured pile of text passages.",
-    "kag.a.title": "Augmented",
-    "kag.a.text": "The model's prompt is enriched with the exact path found in that graph — the specific chain of edges connecting the reported symptom to a cause and a fix — not a loose paragraph that merely sounds related.",
-    "kag.g.title": "Generation",
-    "kag.g.text": "The model writes the final answer using only that path, under strict rules: cite the exact chain of relationships followed and the manual it came from — never add a relationship that wasn't found in the graph.",
-    "kag.analogy": "<strong>The wiring-diagram analogy:</strong> a plain AI chat is like a technician working from memory — confident, but occasionally wrong. This system works like someone following the plant's actual wiring diagram: before answering, it traces the real path from symptom to cause to corrective action, and only writes the answer using a path that truly exists in the diagram.",
-    "kag.step1.title": "1 · Extraction",
-    "kag.step1.text": "An LLM reads each manual and extracts structured relationships — origin, relation, destination — using only four allowed relation types. Anything that doesn't fit the schema is discarded, not forced in.",
-    "kag.step2.title": "2 · Graph construction",
-    "kag.step2.text": "The relationships become one directed graph. The same entity mentioned in different manuals becomes a single shared node — this is how knowledge from separate documents connects.",
-    "kag.step3.title": "3 · Traversal & generation",
-    "kag.step3.text": "A plain algorithm — not the LLM — walks the graph from the identified entity, up to three hops. The LLM only writes the final sentence from the path it's handed.",
-    "kag.chainCaption": "Every answer is a walk along this chain — never a shortcut across it.",
-    "kag.note": "💡 If the graph has no path for a question — or the question is too vague to choose one — the agent says so, or asks for the missing detail, instead of inventing a relationship.",
-    "cmp.title": "KAG vs. RAG — what each one is for",
+    "graphrag.title": "What is Graph RAG?",
+    "graphrag.sub": "Graph RAG stands for Graph Retrieval-Augmented Generation — an approach that grounds an LLM's answer in a structured knowledge graph of real entities and relationships, instead of loose retrieved text. Letter by letter:",
+    "graphrag.g1.title": "Graph",
+    "graphrag.g1.text": "A structured graph of real entities and relationships — equipment, components, symptoms, causes and actions — extracted from the manuals, instead of an unstructured pile of text passages.",
+    "graphrag.r.title": "Retrieval",
+    "graphrag.r.text": "A deterministic algorithm walks the graph's real edges to find the path — retrieval is a graph traversal, not a similarity search over text.",
+    "graphrag.a.title": "Augmented",
+    "graphrag.a.text": "The model's prompt is enriched with the exact path found in that graph — the specific chain of edges connecting the reported symptom to a cause and a fix — not a loose paragraph that merely sounds related.",
+    "graphrag.g2.title": "Generation",
+    "graphrag.g2.text": "The model writes the final answer using only that path, under strict rules: cite the exact chain of relationships followed and the manual it came from — never add a relationship that wasn't found in the graph.",
+    "graphrag.analogy": "<strong>The wiring-diagram analogy:</strong> a plain AI chat is like a technician working from memory — confident, but occasionally wrong. This system works like someone following the plant's actual wiring diagram: before answering, it traces the real path from symptom to cause to corrective action, and only writes the answer using a path that truly exists in the diagram.",
+    "graphrag.step1.title": "1 · Extraction",
+    "graphrag.step1.text": "An LLM reads each manual and extracts structured relationships — origin, relation, destination — using only four allowed relation types. Anything that doesn't fit the schema is discarded, not forced in.",
+    "graphrag.step2.title": "2 · Graph construction",
+    "graphrag.step2.text": "The relationships become one directed graph. The same entity mentioned in different manuals becomes a single shared node — this is how knowledge from separate documents connects.",
+    "graphrag.step3.title": "3 · Traversal & generation",
+    "graphrag.step3.text": "A plain algorithm — not the LLM — walks the graph from the identified entity, up to three hops. The LLM only writes the final sentence from the path it's handed.",
+    "graphrag.chainCaption": "Every answer is a walk along this chain — never a shortcut across it.",
+    "graphrag.note": "💡 If the graph has no path for a question — or the question is too vague to choose one — the agent says so, or asks for the missing detail, instead of inventing a relationship.",
+    "cmp.title": "Graph RAG vs. RAG — what each one is for",
     "cmp.sub": "Both are ways to ground an LLM in your own data instead of its training memory. They differ in what counts as \"retrieved evidence\" — and that changes what each is good at.",
     "cmp.ragTag": "Best for: open-ended document Q&A",
     "cmp.ragTitle": "Traditional RAG",
     "cmp.ragBody1": "Splits documents into chunks and retrieves the ones that sound closest to the question. Works great when the answer lives inside a single passage — a contract clause, a paragraph in a report, an FAQ entry.",
     "cmp.ragBody2": "Struggles when the answer requires connecting facts scattered across different passages — the model has to guess how they relate, which is exactly where it can hallucinate.",
-    "cmp.kagTag": "Best for: multi-hop, structured reasoning",
-    "cmp.kagTitle": "Knowledge Augmented Generation",
-    "cmp.kagBody1": "Matches the question to a node in a real graph and walks the actual edges from there. Built for domains with explicit cause-and-effect chains — like equipment diagnostics — where the answer is a path, not a passage, and every step needs to be auditable.",
-    "cmp.kagBody2": "Costs more to set up (extraction + graph modeling) and fits a narrower, more structured domain than open-ended RAG — the trade-off for a reasoning chain you can fully trace.",
+    "cmp.graphragTag": "Best for: multi-hop, structured reasoning",
+    "cmp.graphragTitle": "Graph RAG",
+    "cmp.graphragBody1": "Matches the question to a node in a real graph and walks the actual edges from there. Built for domains with explicit cause-and-effect chains — like equipment diagnostics — where the answer is a path, not a passage, and every step needs to be auditable.",
+    "cmp.graphragBody2": "Costs more to set up (extraction + graph modeling) and fits a narrower, more structured domain than open-ended RAG — the trade-off for a reasoning chain you can fully trace.",
     "arch.title": "Architecture: from maintenance manual to grounded answer",
     "arch.sub": "Every step of the pipeline is a small, readable Python module — built by hand, with no graph-RAG framework in between.",
     "arch.s1.title": "Source manuals — <code>data/raw/</code>",
@@ -694,18 +703,18 @@ const I18N = {
     "contact.sub": "The full source code is open — every module is small enough to read in one sitting.",
     "contact.repo": "GitHub repository",
     "contact.author": "Author",
-    "footer.text": "KAG Agent Mining — portfolio project · knowledge graph built from scratch in Python · synthetic data"
+    "footer.text": "Graph RAG Agent Mining — portfolio project · knowledge graph built from scratch in Python · synthetic data"
   },
   pt: {
     "nav.about": "Sobre",
-    "nav.kag": "O que é uma KAG",
+    "nav.graphrag": "O que é Graph RAG",
     "nav.architecture": "Arquitetura",
     "nav.databases": "Bases de dados",
     "nav.cta": "Repositório",
-    "hero.kicker": "Knowledge Augmented Generation · construído do zero · dados sintéticos",
-    "hero.title": "KAG Agent Mining",
+    "hero.kicker": "Graph Retrieval-Augmented Generation · construído do zero · dados sintéticos",
+    "hero.title": "Graph RAG Agent Mining",
     "hero.lead": "Um assistente de diagnóstico para equipes de manutenção de mineração. Descreva uma falha em linguagem natural e receba a causa provável e a ação corretiva para peneiras, transportadores, caminhões fora de estrada e britadores — rastreado por um grafo de conhecimento real, nunca chutado.",
-    "hero.btnKag": "O que é uma KAG?",
+    "hero.btnGraphRag": "O que é Graph RAG?",
     "hero.btnDb": "Explorar as bases de dados",
     "about.title": "Feito para quem conserta o equipamento",
     "about.sub": "Equipes de manutenção e confiabilidade não têm tempo de vasculhar um manual página por página com um ativo parado. Este projeto transforma essa busca em uma única pergunta — e uma resposta que dá para verificar.",
@@ -715,33 +724,35 @@ const I18N = {
     "about.card2.text": "Toda resposta nomeia a causa provável e a ação corretiva, com a cadeia exata de relações e o manual de origem.",
     "about.card3.title": "Recebe uma pergunta, não um chute",
     "about.card3.text": "Se a pergunta não especifica o suficiente (ex.: um componente com vários sintomas possíveis), o agente pergunta qual deles — em vez de escolher um ao acaso.",
-    "kag.title": "O que é uma KAG?",
-    "kag.sub": "KAG significa Knowledge Augmented Generation (geração aumentada por conhecimento) — uma abordagem que ancora a resposta de um LLM em um grafo de conhecimento estruturado de entidades e relações reais, em vez de texto recuperado solto. Letra por letra:",
-    "kag.k.title": "Knowledge (Conhecimento)",
-    "kag.k.text": "Um grafo estruturado de entidades e relações reais — equipamentos, componentes, sintomas, causas e ações — extraído dos manuais, em vez de uma pilha não estruturada de trechos de texto.",
-    "kag.a.title": "Augmented (Aumentada)",
-    "kag.a.text": "O prompt do modelo é enriquecido com o caminho exato encontrado nesse grafo — a cadeia específica de arestas que conecta o sintoma relatado a uma causa e uma solução — não um parágrafo solto que só soa relacionado.",
-    "kag.g.title": "Generation (Geração)",
-    "kag.g.text": "O modelo escreve a resposta final usando somente esse caminho, sob regras rígidas: citar a cadeia exata de relações percorrida e o manual de origem — nunca acrescentar uma relação que não foi encontrada no grafo.",
-    "kag.analogy": "<strong>Analogia do diagrama elétrico:</strong> um chat de IA comum é como um técnico trabalhando de memória — confiante, mas às vezes errado. Este sistema funciona como alguém seguindo o diagrama elétrico real da planta: antes de responder, ele traça o caminho real de sintoma até causa e ação corretiva, e só escreve a resposta usando um caminho que realmente existe no diagrama.",
-    "kag.step1.title": "1 · Extração",
-    "kag.step1.text": "Um LLM lê cada manual e extrai relações estruturadas — origem, relação, destino — usando somente quatro tipos de relação permitidos. O que não se encaixa no esquema é descartado, nunca forçado.",
-    "kag.step2.title": "2 · Construção do grafo",
-    "kag.step2.text": "As relações viram um único grafo direcionado. A mesma entidade citada em manuais diferentes vira um único nó compartilhado — é assim que o conhecimento de documentos separados se conecta.",
-    "kag.step3.title": "3 · Travessia e geração",
-    "kag.step3.text": "Um algoritmo simples — não o LLM — percorre o grafo a partir da entidade identificada, até três saltos. O LLM só escreve a frase final a partir do caminho que recebeu.",
-    "kag.chainCaption": "Toda resposta é um percurso por essa cadeia — nunca um atalho por cima dela.",
-    "kag.note": "💡 Se o grafo não tem um caminho para a pergunta — ou a pergunta é vaga demais para escolher um — o agente diz isso, ou pede o detalhe que falta, em vez de inventar uma relação.",
-    "cmp.title": "KAG vs. RAG — para que serve cada uma",
+    "graphrag.title": "O que é Graph RAG?",
+    "graphrag.sub": "Graph RAG significa Graph Retrieval-Augmented Generation (geração aumentada por recuperação em grafo) — uma abordagem que ancora a resposta de um LLM em um grafo de conhecimento estruturado de entidades e relações reais, em vez de texto recuperado solto. Letra por letra:",
+    "graphrag.g1.title": "Graph (Grafo)",
+    "graphrag.g1.text": "Um grafo estruturado de entidades e relações reais — equipamentos, componentes, sintomas, causas e ações — extraído dos manuais, em vez de uma pilha não estruturada de trechos de texto.",
+    "graphrag.r.title": "Retrieval (Recuperação)",
+    "graphrag.r.text": "Um algoritmo determinístico percorre as arestas reais do grafo para encontrar o caminho — a recuperação é uma travessia de grafo, não uma busca por similaridade em texto.",
+    "graphrag.a.title": "Augmented (Aumentada)",
+    "graphrag.a.text": "O prompt do modelo é enriquecido com o caminho exato encontrado nesse grafo — a cadeia específica de arestas que conecta o sintoma relatado a uma causa e uma solução — não um parágrafo solto que só soa relacionado.",
+    "graphrag.g2.title": "Generation (Geração)",
+    "graphrag.g2.text": "O modelo escreve a resposta final usando somente esse caminho, sob regras rígidas: citar a cadeia exata de relações percorrida e o manual de origem — nunca acrescentar uma relação que não foi encontrada no grafo.",
+    "graphrag.analogy": "<strong>Analogia do diagrama elétrico:</strong> um chat de IA comum é como um técnico trabalhando de memória — confiante, mas às vezes errado. Este sistema funciona como alguém seguindo o diagrama elétrico real da planta: antes de responder, ele traça o caminho real de sintoma até causa e ação corretiva, e só escreve a resposta usando um caminho que realmente existe no diagrama.",
+    "graphrag.step1.title": "1 · Extração",
+    "graphrag.step1.text": "Um LLM lê cada manual e extrai relações estruturadas — origem, relação, destino — usando somente quatro tipos de relação permitidos. O que não se encaixa no esquema é descartado, nunca forçado.",
+    "graphrag.step2.title": "2 · Construção do grafo",
+    "graphrag.step2.text": "As relações viram um único grafo direcionado. A mesma entidade citada em manuais diferentes vira um único nó compartilhado — é assim que o conhecimento de documentos separados se conecta.",
+    "graphrag.step3.title": "3 · Travessia e geração",
+    "graphrag.step3.text": "Um algoritmo simples — não o LLM — percorre o grafo a partir da entidade identificada, até três saltos. O LLM só escreve a frase final a partir do caminho que recebeu.",
+    "graphrag.chainCaption": "Toda resposta é um percurso por essa cadeia — nunca um atalho por cima dela.",
+    "graphrag.note": "💡 Se o grafo não tem um caminho para a pergunta — ou a pergunta é vaga demais para escolher um — o agente diz isso, ou pede o detalhe que falta, em vez de inventar uma relação.",
+    "cmp.title": "Graph RAG vs. RAG — para que serve cada uma",
     "cmp.sub": "Ambas são formas de ancorar um LLM nos seus próprios dados, em vez da memória de treinamento. Elas diferem no que conta como \"evidência recuperada\" — e isso muda para que cada uma serve melhor.",
     "cmp.ragTag": "Ideal para: perguntas abertas sobre documentos",
     "cmp.ragTitle": "RAG tradicional",
     "cmp.ragBody1": "Divide os documentos em pedaços (chunks) e recupera os que soam mais parecidos com a pergunta. Funciona muito bem quando a resposta cabe em um único trecho — uma cláusula de contrato, um parágrafo de um relatório, uma entrada de FAQ.",
     "cmp.ragBody2": "Tem dificuldade quando a resposta exige conectar fatos espalhados por trechos diferentes — o modelo precisa adivinhar como eles se relacionam, e é exatamente aí que ele pode alucinar.",
-    "cmp.kagTag": "Ideal para: raciocínio multi-hop e estruturado",
-    "cmp.kagTitle": "Knowledge Augmented Generation",
-    "cmp.kagBody1": "Mapeia a pergunta para um nó em um grafo real e percorre as arestas de verdade a partir dali. Feito para domínios com cadeias explícitas de causa e efeito — como diagnóstico de equipamentos — onde a resposta é um caminho, não um trecho, e cada passo precisa ser auditável.",
-    "cmp.kagBody2": "Custa mais para montar (extração + modelagem do grafo) e serve a um domínio mais estreito e estruturado do que o RAG aberto — o preço de ter uma cadeia de raciocínio totalmente rastreável.",
+    "cmp.graphragTag": "Ideal para: raciocínio multi-hop e estruturado",
+    "cmp.graphragTitle": "Graph RAG",
+    "cmp.graphragBody1": "Mapeia a pergunta para um nó em um grafo real e percorre as arestas de verdade a partir dali. Feito para domínios com cadeias explícitas de causa e efeito — como diagnóstico de equipamentos — onde a resposta é um caminho, não um trecho, e cada passo precisa ser auditável.",
+    "cmp.graphragBody2": "Custa mais para montar (extração + modelagem do grafo) e serve a um domínio mais estreito e estruturado do que o RAG aberto — o preço de ter uma cadeia de raciocínio totalmente rastreável.",
     "arch.title": "Arquitetura: do manual de manutenção à resposta ancorada",
     "arch.sub": "Cada etapa do pipeline é um módulo Python pequeno e legível — construído à mão, sem nenhum framework de graph-RAG no meio do caminho.",
     "arch.s1.title": "Manuais de origem — <code>data/raw/</code>",
@@ -793,7 +804,7 @@ const I18N = {
     "contact.sub": "O código-fonte completo é aberto — cada módulo é pequeno o bastante para ler de uma sentada.",
     "contact.repo": "Repositório no GitHub",
     "contact.author": "Autor",
-    "footer.text": "KAG Agent Mining — projeto de portfólio · grafo de conhecimento construído do zero em Python · dados sintéticos"
+    "footer.text": "Graph RAG Agent Mining — projeto de portfólio · grafo de conhecimento construído do zero em Python · dados sintéticos"
   }
 };
 

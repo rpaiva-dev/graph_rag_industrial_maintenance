@@ -1,0 +1,483 @@
+<title>RAG vs Graph RAG — animated comparison</title>
+<style>
+  :root {
+    --bg: #0b0e16;
+    --stage: #0e121c;
+    --panel: #11161f;
+    --panel-line: #232a3a;
+    --text: #eef0f6;
+    --text-soft: #838ba3;
+    --rag: #f2994a;
+    --rag-soft: rgba(242, 153, 74, 0.14);
+    --graphrag: #4fd1c5;
+    --graphrag-soft: rgba(79, 209, 197, 0.14);
+    --flash: #ffe08a;
+    --font-display: -apple-system, "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+
+  /* Deliberate single dark "broadcast stage" — this asset is built to be
+     screen-recorded into a video/GIF for a LinkedIn post, not read as a
+     themed web page, so it intentionally does not adapt to light mode. */
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    display: flex;
+    justify-content: center;
+    padding: 28px 12px;
+  }
+
+  .stage {
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 4 / 5;
+    background: var(--stage);
+    border-radius: 20px;
+    border: 1px solid var(--panel-line);
+    padding: 26px 26px 20px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 18% 8%, rgba(79, 209, 197, 0.08), transparent 40%),
+      radial-gradient(circle at 82% 8%, rgba(242, 153, 74, 0.08), transparent 40%);
+    pointer-events: none;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .heading h1 {
+    margin: 0;
+    font-size: clamp(1.3rem, 4vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .heading h1 span.rag { color: var(--rag); }
+  .heading h1 span.graphrag { color: var(--graphrag); }
+
+  .heading p {
+    margin: 4px 0 0 0;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    max-width: 46ch;
+  }
+
+  .replay {
+    flex-shrink: 0;
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .replay:hover { border-color: var(--text-soft); transform: translateY(-1px); }
+  .replay:focus-visible { outline: 2px solid var(--graphrag); outline-offset: 2px; }
+
+  .columns {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    min-height: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .columns::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    bottom: 4px;
+    width: 1px;
+    background: var(--panel-line);
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+  }
+
+  .col-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    width: fit-content;
+  }
+  .col-label.rag { color: var(--rag); background: var(--rag-soft); }
+  .col-label.graphrag { color: var(--graphrag); background: var(--graphrag-soft); }
+
+  .row {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* ---- query row ---- */
+  .row-query { padding: 8px 10px; min-height: 30px; }
+  .query-chip {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text);
+    opacity: 0;
+    animation: queryIn 8s infinite;
+  }
+  .col.rag .query-chip { animation-name: queryIn; }
+
+  @keyframes queryIn {
+    0%, 8%   { opacity: 0; transform: translateY(-4px); }
+    12%, 85% { opacity: 1; transform: translateY(0); }
+    93%, 100%{ opacity: 0; transform: translateY(-4px); }
+  }
+
+  .connector {
+    align-self: center;
+    width: 2px;
+    height: 12px;
+    background: var(--panel-line);
+    position: relative;
+  }
+  .connector::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--line-color, var(--graphrag));
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: connectorDraw 8s infinite;
+  }
+  .col.rag .connector::after { background: var(--rag); }
+  .col.graphrag .connector::after { background: var(--graphrag); }
+  .connector.c1::after { animation-delay: 0s; }
+  .connector.c2::after { animation-name: connectorDraw2; }
+  .connector.c3::after { animation-name: connectorDraw3; }
+
+  @keyframes connectorDraw {
+    0%, 10%  { transform: scaleY(0); }
+    14%, 88% { transform: scaleY(1); }
+    93%,100% { transform: scaleY(0); }
+  }
+  @keyframes connectorDraw2 {
+    0%, 40%  { transform: scaleY(0); }
+    45%, 88% { transform: scaleY(1); }
+    93%,100% { transform: scaleY(0); }
+  }
+  @keyframes connectorDraw3 {
+    0%, 55%  { transform: scaleY(0); }
+    58%, 88% { transform: scaleY(1); }
+    93%,100% { transform: scaleY(0); }
+  }
+
+  /* ---- mechanism row (RAG chunks) ---- */
+  .row-mechanism { flex: 1; padding: 12px 8px; }
+
+  .chunk-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+    width: 100%;
+  }
+  .chunk {
+    border: 1px solid var(--panel-line);
+    background: var(--stage);
+    border-radius: 8px;
+    padding: 8px 6px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+  .chunk .l { display: block; height: 4px; border-radius: 2px; background: currentColor; opacity: .35; margin-bottom: 3px; width: 100%; }
+  .chunk .l:last-child { width: 60%; margin-bottom: 0; }
+  .chunk.match {
+    animation: chunkPulse 8s infinite;
+  }
+  @keyframes chunkPulse {
+    0%, 15%  { border-color: var(--panel-line); background: var(--stage); box-shadow: none; }
+    18%, 42% { border-color: var(--rag); background: var(--rag-soft); box-shadow: 0 0 0 3px rgba(242,153,74,.25); }
+    48%,100% { border-color: var(--panel-line); background: var(--stage); box-shadow: none; }
+  }
+  .chunk.match .l { color: var(--rag); }
+
+  /* ---- mechanism row (Graph RAG graph) ---- */
+  .graph { position: relative; width: 100%; height: 100%; min-height: 92px; }
+  .node {
+    position: absolute;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--stage);
+    border: 2px solid var(--panel-line);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--text-soft);
+    transform: translate(-50%, -50%);
+  }
+  .node.n1 { top: 50%; left: 10%; }
+  .node.n2 { top: 20%; left: 38%; }
+  .node.n3 { top: 78%; left: 40%; }
+  .node.n4 { top: 50%; left: 68%; }
+  .node.n5 { top: 50%; left: 94%; }
+
+  .edge {
+    position: absolute;
+    height: 2px;
+    background: var(--panel-line);
+    transform-origin: left center;
+  }
+  .edge span {
+    position: absolute; inset: 0;
+    background: var(--graphrag);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .edge.e1 { top: 33%; left: 10%; width: 30%; transform: rotate(-32deg); }
+  .edge.e2 { top: 63%; left: 12%; width: 30%; transform: rotate(30deg); }
+  .edge.e3 { top: 50%; left: 40%; width: 28%; }
+  .edge.e4 { top: 50%; left: 68%; width: 26%; }
+
+  .node.path, .edge.path span { animation-timing-function: ease-out; animation-iteration-count: infinite; animation-duration: 8s; }
+  .node.n2.path { animation-name: nodeLightA; }
+  .edge.e3.path span { animation-name: edgeLightB; }
+  .node.n4.path { animation-name: nodeLightC; }
+  .edge.e4.path span { animation-name: edgeLightD; }
+  .node.n5.path { animation-name: nodeLightE; }
+
+  @keyframes nodeLightA {
+    0%, 15%  { border-color: var(--panel-line); color: var(--text-soft); box-shadow: none; }
+    17%      { border-color: var(--flash); color: var(--stage); background: var(--flash); box-shadow: 0 0 0 5px rgba(255,224,138,.3); }
+    22%, 42% { border-color: var(--graphrag); color: var(--graphrag); background: var(--stage); box-shadow: 0 0 0 3px rgba(79,209,197,.25); }
+    48%,100% { border-color: var(--panel-line); color: var(--text-soft); background: var(--stage); box-shadow: none; }
+  }
+  @keyframes edgeLightB {
+    0%, 20%  { transform: scaleX(0); }
+    24%, 42% { transform: scaleX(1); }
+    48%,100% { transform: scaleX(0); }
+  }
+  @keyframes nodeLightC {
+    0%, 24%  { border-color: var(--panel-line); color: var(--text-soft); box-shadow: none; }
+    27%      { border-color: var(--flash); color: var(--stage); background: var(--flash); box-shadow: 0 0 0 5px rgba(255,224,138,.3); }
+    31%, 42% { border-color: var(--graphrag); color: var(--graphrag); background: var(--stage); box-shadow: 0 0 0 3px rgba(79,209,197,.25); }
+    48%,100% { border-color: var(--panel-line); color: var(--text-soft); background: var(--stage); box-shadow: none; }
+  }
+  @keyframes edgeLightD {
+    0%, 30%  { transform: scaleX(0); }
+    34%, 42% { transform: scaleX(1); }
+    48%,100% { transform: scaleX(0); }
+  }
+  @keyframes nodeLightE {
+    0%, 33%  { border-color: var(--panel-line); color: var(--text-soft); box-shadow: none; }
+    36%      { border-color: var(--flash); color: var(--stage); background: var(--flash); box-shadow: 0 0 0 5px rgba(255,224,138,.3); }
+    40%, 42% { border-color: var(--graphrag); color: var(--graphrag); background: var(--stage); box-shadow: 0 0 0 3px rgba(79,209,197,.25); }
+    48%,100% { border-color: var(--panel-line); color: var(--text-soft); background: var(--stage); box-shadow: none; }
+  }
+
+  /* ---- LLM row ---- */
+  .row-llm { padding: 8px; }
+  .llm-chip {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.72rem;
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--panel-line);
+    color: var(--text-soft);
+    animation: llmPulse 8s infinite;
+  }
+  .col.rag .llm-chip { animation-name: llmPulseRag; }
+  @keyframes llmPulseRag {
+    0%, 43%  { border-color: var(--panel-line); color: var(--text-soft); box-shadow: none; }
+    46%, 58% { border-color: var(--rag); color: var(--rag); box-shadow: 0 0 0 3px rgba(242,153,74,.2); }
+    64%,100% { border-color: var(--panel-line); color: var(--text-soft); box-shadow: none; }
+  }
+  @keyframes llmPulse {
+    0%, 43%  { border-color: var(--panel-line); color: var(--text-soft); box-shadow: none; }
+    46%, 58% { border-color: var(--graphrag); color: var(--graphrag); box-shadow: 0 0 0 3px rgba(79,209,197,.2); }
+    64%,100% { border-color: var(--panel-line); color: var(--text-soft); box-shadow: none; }
+  }
+
+  /* ---- answer row ---- */
+  .row-answer { flex-direction: column; align-items: stretch; gap: 6px; padding: 10px; }
+  .answer-bubble {
+    opacity: 0;
+    transform: translateY(6px);
+    animation: answerIn 8s infinite;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  @keyframes answerIn {
+    0%, 62%  { opacity: 0; transform: translateY(6px); }
+    68%, 88% { opacity: 1; transform: translateY(0); }
+    94%,100% { opacity: 0; transform: translateY(6px); }
+  }
+  .answer-text {
+    font-size: 0.68rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .evidence-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    width: fit-content;
+  }
+  .evidence-tag.rag {
+    border: 1px dashed var(--rag);
+    color: var(--rag);
+    background: transparent;
+  }
+  .evidence-tag.graphrag {
+    border: 1px solid var(--graphrag);
+    color: var(--stage);
+    background: var(--graphrag);
+  }
+
+  .captions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .caption {
+    font-size: 0.74rem;
+    color: var(--text-soft);
+    text-align: center;
+    padding-top: 2px;
+  }
+  .caption strong { color: var(--text); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage * { animation-play-state: paused !important; animation-delay: -6.5s !important; }
+  }
+</style>
+
+<div class="stage" id="stage">
+  <div class="top-bar">
+    <div class="heading">
+      <h1><span class="rag">RAG</span> vs <span class="graphrag">Graph RAG</span></h1>
+      <p>Two ways to ground an LLM in your own data — same goal, different evidence.</p>
+    </div>
+    <button class="replay" id="replayBtn" type="button">Replay</button>
+  </div>
+
+  <div class="columns" id="columns">
+    <div class="col rag">
+      <span class="col-label rag">Retrieval-Augmented Generation</span>
+
+      <div class="row row-query"><span class="query-chip">→ “Why is the crusher vibrating?”</span></div>
+      <div class="connector c1"></div>
+
+      <div class="row row-mechanism">
+        <div class="chunk-grid">
+          <div class="chunk"><span class="l"></span><span class="l"></span></div>
+          <div class="chunk match"><span class="l"></span><span class="l"></span></div>
+          <div class="chunk"><span class="l"></span><span class="l"></span></div>
+          <div class="chunk"><span class="l"></span><span class="l"></span></div>
+        </div>
+      </div>
+      <div class="connector c2"></div>
+
+      <div class="row row-llm"><span class="llm-chip">LLM</span></div>
+      <div class="connector c3"></div>
+
+      <div class="row row-answer">
+        <div class="answer-bubble">
+          <span class="answer-text">“Might be bearing wear — this chunk sounded related.”</span>
+          <span class="evidence-tag rag">best guess</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col graphrag">
+      <span class="col-label graphrag">Graph Retrieval-Augmented Generation</span>
+
+      <div class="row row-query"><span class="query-chip">→ “Why is the crusher vibrating?”</span></div>
+      <div class="connector c1"></div>
+
+      <div class="row row-mechanism">
+        <div class="graph">
+          <div class="edge e1"><span></span></div>
+          <div class="edge e2"><span></span></div>
+          <div class="edge e3 path"><span></span></div>
+          <div class="edge e4 path"><span></span></div>
+          <div class="node n1">EQ</div>
+          <div class="node n2 path">SY</div>
+          <div class="node n3">SY</div>
+          <div class="node n4 path">CA</div>
+          <div class="node n5 path">AC</div>
+        </div>
+      </div>
+      <div class="connector c2"></div>
+
+      <div class="row row-llm"><span class="llm-chip">LLM</span></div>
+      <div class="connector c3"></div>
+
+      <div class="row row-answer">
+        <div class="answer-bubble">
+          <span class="answer-text">“Vibration → bearing wear → replace &amp; realign.”</span>
+          <span class="evidence-tag graphrag">✓ path verified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="captions">
+    <p class="caption"><strong>RAG</strong> guesses which text is related.</p>
+    <p class="caption"><strong>Graph RAG</strong> proves the path — or asks for detail.</p>
+  </div>
+</div>
+
+<script>
+  // Restart every CSS animation in sync by cloning the animated subtree —
+  // simplest reliable way to reset a set of infinite keyframe animations
+  // to their 0% state at the same instant, so a re-recording starts clean.
+  function restartAnimations() {
+    const columns = document.getElementById('columns');
+    const clone = columns.cloneNode(true);
+    columns.replaceWith(clone);
+  }
+  document.getElementById('replayBtn').addEventListener('click', restartAnimations);
+</script>

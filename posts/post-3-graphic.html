@@ -1,0 +1,122 @@
+<title>How RAG works — the pipeline</title>
+<style>
+  :root {
+    --bg: #0b0e16;
+    --stage: #0e121c;
+    --panel: #11161f;
+    --panel-line: #232a3a;
+    --text: #eef0f6;
+    --text-soft: #838ba3;
+    --rag: #f2994a;
+    --rag-soft: rgba(242, 153, 74, 0.14);
+    --font-display: -apple-system, "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-display);
+    display: flex; justify-content: center; align-items: flex-start; padding: 28px 12px;
+  }
+  .stage {
+    width: 100%; max-width: 640px; aspect-ratio: 4 / 3.4;
+    background: var(--stage); border-radius: 20px; border: 1px solid var(--panel-line);
+    padding: 34px 30px; display: flex; flex-direction: column; gap: 16px;
+    position: relative; overflow: hidden;
+  }
+  .stage::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 82% 4%, rgba(242, 153, 74, 0.10), transparent 42%);
+    pointer-events: none;
+  }
+  .head { position: relative; z-index: 1; }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--rag);
+    margin-bottom: 10px; display: block;
+  }
+  h1 { margin: 0 0 8px 0; font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+  .head p { margin: 0; color: var(--text-soft); font-size: 0.94rem; max-width: 44ch; }
+
+  .pipeline { display: flex; flex-direction: column; gap: 4px; position: relative; z-index: 1; }
+  .step {
+    display: flex; gap: 14px; align-items: center;
+    background: var(--panel); border: 1px solid var(--panel-line); border-radius: 14px;
+    padding: 14px 16px;
+  }
+  .num {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rag); color: var(--stage); font-weight: 800; font-size: 0.85rem;
+    font-family: var(--font-mono);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-copy { flex: 1; min-width: 0; }
+  .step-copy h2 { margin: 0 0 3px 0; font-size: 0.96rem; font-weight: 700; }
+  .step-copy p { margin: 0; font-size: 0.8rem; color: var(--text-soft); line-height: 1.4; }
+  .visual { flex-shrink: 0; width: 84px; height: 46px; position: relative; }
+
+  /* step 1: doc splitting into chunks */
+  .chunks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; }
+  .chunks div { background: var(--bg); border: 1px solid var(--rag); border-radius: 3px; opacity: .55; }
+
+  /* step 2: query hitting one chunk among several */
+  .search { display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--panel-line); }
+  .dot.hit { background: var(--rag); box-shadow: 0 0 0 3px var(--rag-soft); }
+
+  /* step 3: chunk -> LLM -> answer */
+  .flow3 { display: flex; align-items: center; justify-content: space-between; }
+  .chip-mini { font-family: var(--font-mono); font-size: 0.52rem; font-weight: 700; color: var(--rag); border: 1px solid var(--rag); border-radius: 5px; padding: 3px 5px; }
+  .arrow-mini { color: var(--text-soft); font-size: 0.7rem; }
+
+  .pipe-arrow { text-align: center; color: var(--panel-line); font-size: 0.9rem; line-height: 1; }
+
+  .foot {
+    position: relative; z-index: 1; font-family: var(--font-mono); font-size: 0.72rem;
+    color: var(--text-soft); border-top: 1px solid var(--panel-line); padding-top: 12px;
+  }
+  .foot strong { color: var(--rag); }
+</style>
+
+<div class="stage">
+  <div class="head">
+    <span class="eyebrow">The pipeline</span>
+    <h1>How RAG Works</h1>
+    <p>Three steps most frameworks hide under the hood — built here in plain Python.</p>
+  </div>
+
+  <div class="pipeline">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="step-copy">
+        <h2>Indexing</h2>
+        <p>Split the document into chunks, each turned into a vector (embedding) that captures its meaning.</p>
+      </div>
+      <div class="visual chunks"><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="pipe-arrow">▼</div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="step-copy">
+        <h2>Retrieval</h2>
+        <p>The question becomes a vector too. Cosine similarity finds the chunks closest in meaning.</p>
+      </div>
+      <div class="visual search">
+        <div class="dot"></div><div class="dot hit"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="pipe-arrow">▼</div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="step-copy">
+        <h2>Generation</h2>
+        <p>Retrieved chunks go to the LLM under strict rules: answer only from this, and cite the source.</p>
+      </div>
+      <div class="visual flow3">
+        <span class="chip-mini">CTX</span><span class="arrow-mini">→</span><span class="chip-mini">LLM</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">No FAISS. No Chroma. Just <strong>embeddings + cosine similarity</strong> in plain NumPy.</div>
+</div>

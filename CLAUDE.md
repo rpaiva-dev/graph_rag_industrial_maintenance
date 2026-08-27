@@ -2,9 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project: KAG Agent Mining
+## Project: Graph RAG Agent Mining
 
-A Knowledge Augmented Generation (KAG) system built from SCRATCH, with no ready-made knowledge-graph framework (no LangChain GraphRAG, no LlamaIndex KG, etc). The goal is to learn entity/relation extraction, knowledge graph construction and multi-hop reasoning by implementing every piece by hand.
+A Graph RAG (Graph Retrieval-Augmented Generation) system built from SCRATCH, with no ready-made knowledge-graph framework (no LangChain GraphRAG, no LlamaIndex KG, etc). The goal is to learn entity/relation extraction, knowledge graph construction and multi-hop reasoning by implementing every piece by hand.
 
 Domain: maintenance of **mining** assets — currently 4 asset types: vibrating screen, belt conveyor, off-road haul truck and jaw crusher. **All data in this project is synthetic** — the manuals, components, symptoms, causes and corrective actions were written to simulate realistic maintenance documentation; none of it comes from a real manufacturer manual or a real mining operation. Unlike plain RAG (text-similarity search), the system answers questions that require walking a CHAIN of cause-effect relations: Equipment → Component → Symptom → Cause → Corrective Action.
 

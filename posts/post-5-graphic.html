@@ -1,0 +1,116 @@
+<title>What is Graph RAG?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f5f5f7;
+    --text: #1d1d1f;
+    --text-soft: #6e6e73;
+    --line: #d2d2d7;
+    --accent: #0071e3;
+    --dark: #1d1d1f;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; background: var(--bg-soft); color: var(--text);
+    font-family: "Manrope", -apple-system, "Segoe UI", sans-serif;
+    display: flex; justify-content: center; align-items: flex-start; padding: 28px 12px;
+  }
+  .stage {
+    width: 100%; max-width: 640px; aspect-ratio: 4 / 5.9;
+    background: var(--bg); border-radius: 20px; border: 1px solid var(--line);
+    padding: 34px 32px; display: flex; flex-direction: column; gap: 20px;
+    position: relative; overflow: hidden;
+  }
+  .stage::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 18% 0%, rgba(0, 113, 227, 0.08), transparent 45%);
+    pointer-events: none;
+  }
+  .head { position: relative; z-index: 1; }
+  .eyebrow {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px; display: block;
+  }
+  h1 { margin: 0 0 8px 0; font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; }
+  .head p { margin: 0; color: var(--text-soft); font-size: 0.94rem; max-width: 48ch; line-height: 1.5; }
+
+  .letters { display: flex; flex-direction: column; gap: 11px; position: relative; z-index: 1; }
+  .letter-row {
+    display: flex; gap: 16px; align-items: flex-start;
+    border: 1px solid var(--line); border-radius: 14px; padding: 15px 17px;
+    transition: none;
+  }
+  .badge {
+    flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; font-weight: 800;
+  }
+  .letter-copy h2 { margin: 2px 0 4px 0; font-size: 1rem; font-weight: 700; }
+  .letter-copy p { margin: 0; font-size: 0.85rem; color: var(--text-soft); line-height: 1.45; }
+
+  .chain-block { text-align: center; position: relative; z-index: 1; }
+  .chain-block code {
+    display: inline-block; background: var(--dark); color: #f5f5f7;
+    border-radius: 10px; padding: 11px 16px; font-size: 0.82rem;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  }
+  .chain-block p { margin: 10px 0 0 0; font-size: 0.78rem; color: var(--text-soft); }
+
+  .analogy {
+    border-left: 4px solid var(--accent); background: var(--bg-soft);
+    border-radius: 0 12px 12px 0; padding: 13px 16px; font-size: 0.82rem;
+    color: var(--text-soft); position: relative; z-index: 1; margin-top: auto;
+  }
+  .analogy strong { color: var(--text); }
+</style>
+
+<div class="stage">
+  <div class="head">
+    <span class="eyebrow">Grounding an LLM in your data</span>
+    <h1>What is <span style="color:var(--accent)">Graph RAG</span>?</h1>
+    <p>Graph Retrieval-Augmented Generation — an LLM's answer grounded in a structured knowledge graph of real entities and relationships, instead of loose retrieved text. Letter by letter:</p>
+  </div>
+
+  <div class="letters">
+    <div class="letter-row">
+      <div class="badge">G</div>
+      <div class="letter-copy">
+        <h2>Graph</h2>
+        <p>A structured graph of real entities and relationships — equipment, components, symptoms, causes, actions — not an unstructured pile of text.</p>
+      </div>
+    </div>
+    <div class="letter-row">
+      <div class="badge">R</div>
+      <div class="letter-copy">
+        <h2>Retrieval</h2>
+        <p>A deterministic algorithm walks the graph's real edges to find the path — retrieval by traversal, not by similarity search.</p>
+      </div>
+    </div>
+    <div class="letter-row">
+      <div class="badge">A</div>
+      <div class="letter-copy">
+        <h2>Augmented</h2>
+        <p>The model's prompt is enriched with the exact path found in that graph — not a paragraph that merely sounds related.</p>
+      </div>
+    </div>
+    <div class="letter-row">
+      <div class="badge">G</div>
+      <div class="letter-copy">
+        <h2>Generation</h2>
+        <p>The model writes the answer using only that path — citing the exact chain of relationships and the source manual.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chain-block">
+    <code>Equipment → Component → Symptom → Cause → Corrective Action</code>
+    <p>Every answer is a walk along this chain — never a shortcut across it.</p>
+  </div>
+
+  <div class="analogy"><strong>The wiring-diagram analogy:</strong> a plain AI chat guesses from memory. Graph RAG traces the plant's real wiring diagram before it answers.</div>
+</div>

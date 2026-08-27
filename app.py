@@ -1,7 +1,7 @@
-"""Streamlit front-end for KAG Agent Mining (all mining data is synthetic).
+"""Streamlit front-end for Graph RAG Agent Mining (all mining data is synthetic).
 
 LLM-style layout (ChatGPT/Claude):
-- Sidebar with the "KAG Agent Mining" logo, a new-chat button and the list
+- Sidebar with the "Graph RAG Agent Mining" logo, a new-chat button and the list
   of session conversations (each conversation keeps its own history).
 - Config menu with an "About" option: explains the pipeline step by step,
   lists the monitored assets (with description and components) and shows
@@ -36,7 +36,7 @@ from src.graph_builder import GRAPH_FILE, load_graph, run_graph_construction
 from src.graph_query import query
 from src.graph_viz import generate_graph_html, generate_trace_html, subgraph_from_paths
 
-st.set_page_config(page_title="KAG Agent Mining", page_icon="🛠️", layout="wide")
+st.set_page_config(page_title="Graph RAG Agent Mining", page_icon="🛠️", layout="wide")
 
 RAW_FILE = Path(__file__).resolve().parent / "data" / "raw" / "maintenance_manuals.json"
 
@@ -122,8 +122,8 @@ with st.sidebar:
         <div style="display:flex;align-items:center;gap:10px;padding:4px 0 12px 0;">
           <div style="font-size:30px;">🛠️</div>
           <div>
-            <div style="font-size:19px;font-weight:700;line-height:1.1;">KAG Agent Mining</div>
-            <div style="font-size:12px;opacity:.65;">Knowledge Augmented Generation · synthetic data</div>
+            <div style="font-size:19px;font-weight:700;line-height:1.1;">Graph RAG Agent Mining</div>
+            <div style="font-size:12px;opacity:.65;">Graph Retrieval-Augmented Generation · synthetic data</div>
           </div>
         </div>
         """,
@@ -178,12 +178,12 @@ with st.sidebar:
             st.rerun()
 
 # ---------------------------------------------------------------------------
-# "ABOUT" PAGE — the KAG pipeline step by step, the monitored assets and the full graph.
+# "ABOUT" PAGE — the Graph RAG pipeline step by step, the monitored assets and the full graph.
 # ---------------------------------------------------------------------------
 if st.session_state.page == "about":
     col_title, col_back = st.columns([5, 1])
     with col_title:
-        st.title("ℹ️ About — how this KAG works")
+        st.title("ℹ️ About — how this Graph RAG works")
     with col_back:
         if st.button("← Back to chat"):
             st.session_state.page = "chat"
@@ -191,8 +191,8 @@ if st.session_state.page == "about":
 
     st.markdown(
         """
-A **KAG (Knowledge Augmented Generation)** grounds the LLM's answers in a
-**knowledge graph**, instead of loose text passages (as in RAG). This lets
+A **Graph RAG (Graph Retrieval-Augmented Generation)** grounds the LLM's answers in a
+**knowledge graph**, instead of loose text passages (as in plain RAG). This lets
 it answer questions that require **chaining relations** together — and
 prove the path used, or ask for more detail when the question isn't
 specific enough.
@@ -222,7 +222,7 @@ specific enough.
 | **8. Visualization** | The chat shows the subgraph of the points that were connected — the reasoning trail, or the candidate options when the agent asks for clarification | `src/graph_viz.py` |
 
 **The key difference from RAG:** in RAG, the LLM receives similar-sounding
-text and can "fill in the gaps" with what it knows. In KAG, the *evidence*
+text and can "fill in the gaps" with what it knows. In Graph RAG, the *evidence*
 is structural: if the edge doesn't exist in the graph, the relation doesn't
 make it into the answer — and if information is missing to choose between
 edges, the agent asks.
@@ -278,7 +278,7 @@ if not conversation["messages"]:
         """
         <div style="text-align:center;padding:60px 0 20px 0;">
           <div style="font-size:52px;">🛠️</div>
-          <h2 style="margin:4px 0;">KAG Agent Mining</h2>
+          <h2 style="margin:4px 0;">Graph RAG Agent Mining</h2>
           <p style="opacity:.7;">Describe the problem on a mining asset (vibrating screen, belt
           conveyor, haul truck or jaw crusher) and I'll walk the knowledge graph to find the
           probable cause and the corrective action. All data is synthetic.</p>

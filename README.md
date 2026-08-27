@@ -1,10 +1,10 @@
-# KAG Agent Mining
+# Graph RAG Agent Mining
 
-A **Knowledge Augmented Generation** system built from scratch (no LangChain GraphRAG, LlamaIndex KG or similar) over a mining-maintenance knowledge base: equipment, components, symptoms, causes and corrective actions.
+A **Graph RAG (Graph Retrieval-Augmented Generation)** system built from scratch (no LangChain GraphRAG, LlamaIndex KG or similar) over a mining-maintenance knowledge base: equipment, components, symptoms, causes and corrective actions.
 
 > **All data used in this project is synthetic.** The four equipment manuals, and every component, symptom, cause and corrective action inside them, were written to simulate realistic industrial-maintenance documentation — none of it was extracted from a real manufacturer's manual or a real mining operation.
 
-Unlike a plain RAG (which searches for similar-sounding text passages), KAG answers questions that require walking a **chain of cause-effect relations** that doesn't live entirely in one passage:
+Unlike a plain RAG (which searches for similar-sounding text passages), Graph RAG answers questions that require walking a **chain of cause-effect relations** that doesn't live entirely in one passage:
 
 > "The crusher's eccentric shaft is vibrating — what's the most likely cause and the corrective action?"
 >

@@ -2,7 +2,7 @@
 
 This is the heart of the difference from a regular RAG:
 - RAG: embed the question, search for similar chunks, return loose text.
-- KAG: (1) the LLM only does the "linking" — mapping the question to ONE
+- Graph RAG: (1) the LLM only does the "linking" — mapping the question to ONE
   node in the graph; (2) the TRAVERSAL is done by a deterministic algorithm
   (DFS), not by the LLM. Every hop follows an edge that really exists, so
   the chain symptom -> cause -> action is guaranteed to be backed by data.

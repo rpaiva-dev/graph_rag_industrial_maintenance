@@ -1,5 +1,5 @@
 {
-  "description": "Synthetic maintenance manual data for 4 mining asset types, used to prototype the KAG pipeline. Every equipment, component, symptom, cause and corrective action below is FICTIONAL — none of it was extracted from a real manufacturer manual. It only simulates the structure and vocabulary of real maintenance documentation, for learning and demonstration purposes. Each document describes an asset, its components, failure symptoms, probable causes and corrective actions. The 'machine_description' and 'main_components' fields are display metadata — they are not sent to the LLM during extraction, they only feed the app's 'About' page.",
+  "description": "Synthetic maintenance manual data for 4 mining asset types, used to prototype the Graph RAG pipeline. Every equipment, component, symptom, cause and corrective action below is FICTIONAL — none of it was extracted from a real manufacturer manual. It only simulates the structure and vocabulary of real maintenance documentation, for learning and demonstration purposes. Each document describes an asset, its components, failure symptoms, probable causes and corrective actions. The 'machine_description' and 'main_components' fields are display metadata — they are not sent to the LLM during extraction, they only feed the app's 'About' page.",
   "documents": [
     {
       "id": "doc-screen",

@@ -1,0 +1,119 @@
+<title>What is RAG? — letter by letter</title>
+<style>
+  :root {
+    --bg: #0b0e16;
+    --stage: #0e121c;
+    --panel: #11161f;
+    --panel-line: #232a3a;
+    --text: #eef0f6;
+    --text-soft: #838ba3;
+    --rag: #f2994a;
+    --rag-soft: rgba(242, 153, 74, 0.14);
+    --font-display: -apple-system, "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-display);
+    display: flex; justify-content: center; align-items: flex-start; padding: 28px 12px;
+  }
+  .stage {
+    width: 100%; max-width: 640px; aspect-ratio: 4 / 3.85;
+    background: var(--stage); border-radius: 20px; border: 1px solid var(--panel-line);
+    padding: 34px 30px; display: flex; flex-direction: column; gap: 22px;
+    position: relative; overflow: hidden;
+  }
+  .stage::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 0%, rgba(242, 153, 74, 0.10), transparent 42%);
+    pointer-events: none;
+  }
+  .head { position: relative; z-index: 1; }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--rag);
+    margin-bottom: 10px; display: block;
+  }
+  h1 { margin: 0 0 8px 0; font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+  .head p { margin: 0; color: var(--text-soft); font-size: 0.94rem; max-width: 42ch; }
+
+  .letters {
+    display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1;
+  }
+  .letter-row {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--panel); border: 1px solid var(--panel-line); border-radius: 14px;
+    padding: 16px 18px;
+  }
+  .badge {
+    flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
+    background: var(--rag); color: var(--stage);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; font-weight: 800; font-family: var(--font-mono);
+  }
+  .letter-copy h2 { margin: 2px 0 4px 0; font-size: 1.02rem; font-weight: 700; }
+  .letter-copy p { margin: 0; font-size: 0.86rem; color: var(--text-soft); line-height: 1.45; }
+
+  .exam {
+    display: flex; gap: 10px; position: relative; z-index: 1;
+  }
+  .exam-card {
+    flex: 1; border-radius: 12px; padding: 12px 14px; font-size: 0.78rem;
+  }
+  .exam-card.closed {
+    border: 1px dashed var(--panel-line); color: var(--text-soft); background: transparent;
+  }
+  .exam-card.open {
+    border: 1px solid var(--rag); background: var(--rag-soft); color: var(--text);
+  }
+  .exam-card .tag {
+    display: block; font-family: var(--font-mono); font-weight: 700; font-size: 0.68rem;
+    text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px;
+  }
+  .exam-card.closed .tag { color: var(--text-soft); }
+  .exam-card.open .tag { color: var(--rag); }
+</style>
+
+<div class="stage">
+  <div class="head">
+    <span class="eyebrow">Grounding an LLM in your data</span>
+    <h1>What is <span style="color:var(--rag)">RAG</span>?</h1>
+    <p>Retrieval-Augmented Generation — an AI answers from your documents, not just what it memorized in training. Letter by letter:</p>
+  </div>
+
+  <div class="letters">
+    <div class="letter-row">
+      <div class="badge">R</div>
+      <div class="letter-copy">
+        <h2>Retrieval</h2>
+        <p>Before answering, the system searches your documents for the passages most related to the question.</p>
+      </div>
+    </div>
+    <div class="letter-row">
+      <div class="badge">A</div>
+      <div class="letter-copy">
+        <h2>Augmented</h2>
+        <p>The model's prompt is enriched with those passages — real material, attached to the question, not just memory.</p>
+      </div>
+    </div>
+    <div class="letter-row">
+      <div class="badge">G</div>
+      <div class="letter-copy">
+        <h2>Generation</h2>
+        <p>The model writes the answer using only what it received, and cites exactly where it came from.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="exam">
+    <div class="exam-card closed">
+      <span class="tag">Without RAG</span>
+      Closed-book exam — the model guesses confidently from memory.
+    </div>
+    <div class="exam-card open">
+      <span class="tag">With RAG</span>
+      Open-book exam — it answers only from the pages it just retrieved.
+    </div>
+  </div>
+</div>

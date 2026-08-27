@@ -1,0 +1,107 @@
+<title>Why RAG matters</title>
+<style>
+  :root {
+    --bg: #0b0e16;
+    --stage: #0e121c;
+    --panel: #11161f;
+    --panel-line: #232a3a;
+    --text: #eef0f6;
+    --text-soft: #838ba3;
+    --rag: #f2994a;
+    --rag-soft: rgba(242, 153, 74, 0.14);
+    --font-display: -apple-system, "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-display);
+    display: flex; justify-content: center; align-items: flex-start; padding: 28px 12px;
+  }
+  .stage {
+    width: 100%; max-width: 640px; aspect-ratio: 4 / 4.6;
+    background: var(--stage); border-radius: 20px; border: 1px solid var(--panel-line);
+    padding: 34px 30px; display: flex; flex-direction: column; gap: 18px;
+    position: relative; overflow: hidden;
+  }
+  .stage::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(242, 153, 74, 0.10), transparent 42%);
+    pointer-events: none;
+  }
+  .head { position: relative; z-index: 1; }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--rag);
+    margin-bottom: 10px; display: block;
+  }
+  h1 { margin: 0 0 8px 0; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+  .head p { margin: 0; color: var(--text-soft); font-size: 0.9rem; max-width: 44ch; }
+
+  .checklist { display: flex; flex-direction: column; gap: 9px; position: relative; z-index: 1; }
+  .check-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--panel); border: 1px solid var(--panel-line); border-radius: 12px;
+    padding: 11px 14px;
+  }
+  .mark {
+    flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--rag-soft); color: var(--rag); border: 1px solid var(--rag);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 800;
+  }
+  .check-copy h2 { margin: 0 0 2px 0; font-size: 0.9rem; font-weight: 700; }
+  .check-copy p { margin: 0; font-size: 0.78rem; color: var(--text-soft); line-height: 1.35; }
+
+  .example {
+    position: relative; z-index: 1;
+    background: var(--panel); border: 1px solid var(--panel-line); border-radius: 14px;
+    padding: 16px 16px 20px 16px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .example .example-label {
+    font-family: var(--font-mono); font-size: 0.66rem; color: var(--text-soft);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;
+  }
+  .bubble {
+    border-radius: 10px; padding: 8px 12px; font-size: 0.8rem; max-width: 82%;
+  }
+  .bubble.user { align-self: flex-end; background: var(--panel-line); color: var(--text); }
+  .bubble.answer { align-self: flex-start; background: var(--rag-soft); border: 1px solid var(--rag); color: var(--text); }
+  .cite {
+    display: inline-block; margin-top: 6px; font-family: var(--font-mono); font-size: 0.62rem;
+    font-weight: 700; color: var(--stage); background: var(--rag); border-radius: 5px; padding: 2px 7px;
+  }
+</style>
+
+<div class="stage">
+  <div class="head">
+    <span class="eyebrow">In practice</span>
+    <h1>Why RAG Matters</h1>
+    <p>Solves the #1 failure mode of chatbots on private data: confident answers that are just wrong.</p>
+  </div>
+
+  <div class="checklist">
+    <div class="check-row">
+      <div class="mark">✓</div>
+      <div class="check-copy"><h2>Works with private data</h2><p>Contracts, internal reports, manuals — no exposure in the model's training.</p></div>
+    </div>
+    <div class="check-row">
+      <div class="mark">✓</div>
+      <div class="check-copy"><h2>Always up to date</h2><p>Swap the document, the answer changes. No retraining needed.</p></div>
+    </div>
+    <div class="check-row">
+      <div class="mark">✓</div>
+      <div class="check-copy"><h2>Auditable</h2><p>Every answer cites the exact page and section — you can verify it.</p></div>
+    </div>
+    <div class="check-row">
+      <div class="mark">✓</div>
+      <div class="check-copy"><h2>Honest</h2><p>Admits when it doesn't know, instead of inventing a fact or a number.</p></div>
+    </div>
+  </div>
+
+  <div class="example">
+    <span class="example-label">Real example — simple_rag_pdf</span>
+    <div class="bubble user">"What's the total contract value?"</div>
+    <div class="bubble answer">"$42,500."<br><span class="cite">📄 page 12 · section 4.2</span></div>
+  </div>
+</div>
