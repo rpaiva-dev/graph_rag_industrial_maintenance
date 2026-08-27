@@ -121,9 +121,9 @@ def check_specificity(entity: str, graph: nx.DiGraph) -> dict:
                 "ambiguous_relation": "has_component",
                 "candidates": candidates,
                 "clarifying_question": (
-                    f"The **{entity}** has several components that could be "
-                    f"involved: {', '.join(candidates)}. Which component is "
-                    f"showing the problem?"
+                    f"O **{entity}** tem vários componentes que podem estar "
+                    f"envolvidos: {', '.join(candidates)}. Qual componente "
+                    f"está apresentando o problema?"
                 ),
             }
         if len(candidates) == 1:
@@ -141,9 +141,9 @@ def check_specificity(entity: str, graph: nx.DiGraph) -> dict:
                 "ambiguous_relation": "has_symptom",
                 "candidates": candidates,
                 "clarifying_question": (
-                    f"The **{entity}** can present different symptoms: "
-                    f"{', '.join(candidates)}. Which of these symptoms are "
-                    f"you observing?"
+                    f"O **{entity}** pode apresentar sintomas diferentes: "
+                    f"{', '.join(candidates)}. Qual desses sintomas você "
+                    f"está observando?"
                 ),
             }
         return {"needs_clarification": False, "resolved_entity": entity}

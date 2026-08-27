@@ -11,9 +11,9 @@ structure, not from the model's good will.
 from src.llm_client import call_llm
 
 NO_INFORMATION_MESSAGE = (
-    "I couldn't find that information in the knowledge base. "
-    "The graph has no entity related to your question, so I'd rather "
-    "admit I don't know than make something up."
+    "Não encontrei essa informação na base de conhecimento. "
+    "O grafo não tem nenhuma entidade relacionada à sua pergunta, então "
+    "prefiro admitir que não sei do que inventar uma resposta."
 )
 
 SYSTEM_PROMPT = """You are an industrial maintenance assistant that answers EXCLUSIVELY based on a knowledge graph.
@@ -25,7 +25,7 @@ MANDATORY rules:
 2. Make the graph PATH that supports the conclusion explicit in the answer, in the format: entity -[relation]-> entity -[relation]-> entity.
 3. If the provided paths aren't enough to answer, say clearly that the knowledge base doesn't cover that point.
 4. Cite the source document ("source" field) of the relations used.
-5. Answer in English, clearly and directly: probable cause(s) first, then the corrective action(s)."""
+5. Answer in Portuguese (pt-BR), clearly and directly: probable cause(s) first, then the corrective action(s). Keep entity and relation names from the paths as they are (in English), but write all surrounding prose in Portuguese."""
 
 
 def format_paths(paths: list[list[dict]]) -> str:
